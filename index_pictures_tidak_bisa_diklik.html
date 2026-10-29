@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biodata | SlavvTech.Id </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #07070f;
+      --bg-secondary: #0e0e1a;
+      --card: rgba(24, 8, 12, 0.78);
+      --text: #f0f0f8; /* warna putih tetap dipertahankan di mode gelap */
+      --text-muted: #b8a4a8;
+      --primary: #7a0000;
+      --secondary: #b31217;
+      --gold: #4a0000;
+      --accent-rgb: 145, 0, 15;
+      --accent-gradient: linear-gradient(135deg, #2b0000, #650000, #b31217, #7a0000, #3b0000);
+      --border: rgba(145, 0, 15, 0.30);
+      --glow: 0 0 25px rgba(145, 0, 15, 0.42);
+      --radius: 20px;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f7fb;
+      --bg-secondary: #ffffff;
+      --card: rgba(242, 247, 255, 0.90);
+      --text: #081426;
+      --text-muted: #40526d;
+      --primary: #0b3d91;
+      --secondary: #145da0;
+      --gold: #062b63;
+      --accent-rgb: 11, 61, 145;
+      --accent-gradient: linear-gradient(135deg, #031a3d, #062b63, #0b3d91, #145da0, #082f6b);
+      --border: rgba(11, 61, 145, 0.25);
+      --glow: 0 0 22px rgba(11, 61, 145, 0.32);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+instagram
+    /* Background efek */
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(var(--accent-rgb), 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--accent-rgb), 0.035) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.3;
+      animation: float 14s ease-in-out infinite;
+    }
+    .orb1 { width: 380px; height: 380px; background: var(--primary); top: -120px; left: -80px; }
+    .orb2 { width: 320px; height: 320px; background: var(--secondary); bottom: 5%; right: -60px; animation-delay: -5s; }
+    .orb3 { width: 220px; height: 220px; background: var(--gold); top: 45%; left: 55%; animation-delay: -9s; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0,0); }
+      50% { transform: translate(25px, -35px); }
+    }
+
+    /* ===== NAVBAR FUTURISTIK ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7,7,15,0.7);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: 0.3s;
+    }
+    [data-theme="light"] header {
+      background: rgba(255,255,255,0.75);
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      filter: drop-shadow(0 0 7px rgba(var(--accent-rgb), 0.45));
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.92rem;
+      position: relative;
+      transition: 0.3s;
+      letter-spacing: 0.5px;
+    }
+    nav a:hover, nav a.active {
+      color: var(--primary);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent-gradient);
+      box-shadow: var(--glow);
+      transition: width 0.35s;
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .theme-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+    .theme-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 110px 5% 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      text-align: center;
+      margin-bottom: 0.6rem;
+      letter-spacing: 2px;
+    }
+    .section-title span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      font-size: 1rem;
+    }
+
+    /* ===== HERO / BERANDA ===== */
+    #beranda {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero-text h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text .tagline {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.8rem;
+      max-width: 460px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.85rem 1.9rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.35s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #07070f;
+      box-shadow: var(--glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.50);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+    .btn-outline:hover {
+      background: rgba(var(--accent-rgb), 0.10);
+      box-shadow: var(--glow);
+    }
+
+    .hero-photo {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .photo-frame {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+      box-shadow: var(--glow);
+    }
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 0deg, transparent, var(--primary), transparent 40%);
+      animation: spin 10s linear infinite;
+    }
+    .photo-frame img {
+      position: absolute;
+      inset: 4px;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      object-fit: cover;
+      border-radius: 24px;
+      z-index: 1;
+      /* Mode gelap: nuansa merah gelap */
+      filter: sepia(0.35) saturate(1.35) hue-rotate(315deg) brightness(0.82) contrast(1.08);
+      transition: filter 0.55s ease, transform 0.55s ease;
+    }
+
+    /* Mode terang: foto berubah ke nuansa biru gelap */
+    [data-theme="light"] .photo-frame img {
+      filter: sepia(0.28) saturate(1.45) hue-rotate(165deg) brightness(0.92) contrast(1.06);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== BIODATA ===== */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .bio-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      backdrop-filter: blur(14px);
+      transition: 0.4s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .bio-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bio-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+      transform: translateY(-6px);
+    }
+    .bio-card i {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bio-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .bio-card p { color: var(--text-muted); font-size: 0.93rem; }
+
+    /* ===== MEMORI ===== */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.4rem;
+    }
+    .memory-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: 0.5s;
+    }
+    .memory-item.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .memory-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .memory-item:hover img { transform: scale(1.08); }
+    .memory-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(7,7,15,0.85), transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.1rem;
+      opacity: 0;
+      transition: 0.35s;
+    }
+    .memory-item:hover .memory-overlay { opacity: 1; }
+    .memory-overlay span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    /* ===== SOSIAL MEDIA ===== */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.3rem;
+    }
+    .social-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      transition: 0.4s;
+      backdrop-filter: blur(12px);
+    }
+    .social-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+      transform: translateY(-7px);
+    }
+    .social-card i {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .social-card.ig i { color: #e1306c; }
+    .social-card.tw i { color: #1da1f2; }
+    .social-card.yt i { color: #ff0000; }
+    .social-card.li i { color: #0a66c2; }
+    .social-card.gh i { color: #f0f0f8; }
+    .social-card.wa i { color: #25d366; }
+    .social-card span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2.5rem 5%;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    footer .logo {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    /* Animasi */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-text .tagline { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-photo { order: -1; }
+      nav ul {
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 1.8rem;
+        gap: 1.3rem;
+        border-bottom: 1px solid var(--border);
+        transform: translateY(-160%);
+        transition: 0.4s;
+        z-index: 999;
+      }
+      nav ul.open { transform: translateY(0); }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 500px) {
+      section { padding: 90px 1.2rem 60px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects">
+    <div class="grid-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <a href="#beranda" class="logo">SlavvTech.Id</a>
+    <nav>
+      <ul id="nav-menu">
+        <li><a href="#beranda" class="active">Home</a></li>
+        <li><a href="#biodata">About</a></li>
+        <li><a href="#memori">Pictures</a></li>
+        <li><a href="#sosial">Social Media</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-btn" id="theme-toggle" title="Ganti Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- BERANDA -->
+  <section id="beranda">
+    <div class="hero">
+      <div class="hero-text fade-up">
+        <h1>Welcome To <span>SlavvTech.</span></h1>
+        <p class="tagline">SlavvTech.Id adalah personal portfolio website yang dibuat untuk memperkenalkan diri secara lebih menarik dan modern.</p>
+        <div class="hero-btns">
+          <a href="#biodata" class="btn btn-primary"><i class="fas fa-user"></i> About Me!</a>
+          <a href="#memori" class="btn btn-outline"><i class="fas fa-images"></i> Pictures!</a>
+        </div>
+      </div>
+      <div class="hero-photo fade-up">
+        <div class="photo-frame">
+          <img src="https://cdn.phototourl.com/member/2026-10-29-b51d9069-87e9-4831-9eff-17ea8728fad3.png" alt="Profil" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIODATA -->
+  <section id="biodata">
+    <h2 class="section-title fade-up">Bio<span>data</span> Diri</h2>
+    <p class="section-sub fade-up">Sedikit tentang siapa saya dan apa yang saya lakukan.</p>
+    <div class="bio-grid">
+      <div class="bio-card">
+        <i class="fas fa-user-graduate"></i>
+        <h3>Pendidikan</h3>
+        <p>Siswa pada sekolah Smk Informatika Bina Generasi 1, Jurusan Teknik Komputer dan Jaringan.</p>
+      </div>
+      <div class="bio-card">
+        <i class="fas fa-heart"></i>
+        <h3>Minat</h3>
+        <p>Programmer, IT Support, Cybersecurity, Cloud Engineer, Web Developer, Teknisi Komputer, Graphic Designer, Video Editor, Creator, Brand Designer and Playing Games.</p>
+      </div>
+      <div class="bio-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Lokasi</h3>
+        <p>Indonesia, Bogor, Jawa Barat, Kp. Laladon Kadoya Rt02. Rw05. Desa Parakan, Kecamatan Ciomas</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORI -->
+  <section id="memori">
+    <h2 class="section-title fade-up">Pic<span>tures</span></h2>
+    <p class="section-sub fade-up">Kumpulan Random Image My Kisah, My Fineshyt, My Bini, My World, My Future.</p>
+    <div class="memory-grid">
+      <!-- Ganti link photo1.html dst sesuai file yang kamu buat -->
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-34368c64-d49f-4aa0-afe1-6a2a89f1bd01.jpg" alt="Keysa Cantik" />
+        <div class="memory-overlay"><span>Keysa Face #1</span></div>
+      </div>
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-02213d99-6ae3-4e97-b893-d1113f565792.jpg" alt="Keysa Cantik" />
+        <div class="memory-overlay"><span>Keysa Face #2</span></div>
+      </div>
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-4f073a7d-88ea-4424-b0d8-5044db596b44.jpg" alt="Keysa Cantik" />
+        <div class="memory-overlay"><span>Keysa Face #3</span></div>
+      </div>
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-a65610dc-1df4-4047-b067-85991628ae89.jpg" alt="Keysa Cantik" />
+        <div class="memory-overlay"><span>Keysa Face #4</span></div>
+      </div>
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-9da06c70-011c-48d3-bba3-edeb42560646.jpg" alt="Keysa Cantik" />
+        <div class="memory-overlay"><span>Keysa Face #5</span></div>
+      </div>
+      <div class="memory-item">
+        <img src="https://cdn.phototourl.com/member/2026-10-29-d05f29c5-3427-4060-bb2e-3fb0a5849a65.webp" alt="Keysa Face" />
+        <div class="memory-overlay"><span>Keysa Face #6</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOSIAL MEDIA -->
+  <section id="sosial">
+    <h2 class="section-title fade-up">Sosial <span>Media</span></h2>
+    <p class="section-sub fade-up">Temukan saya di berbagai platform.</p>
+    <div class="social-grid">
+      <a href="https://wa.me/6281319437700" target="_blank" class="social-card wa">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a href="https://www.tiktok.com/@lavvvkeysh4_" target="_blank" class="social-card tt">
+        <i class="fab fa-tiktok"></i>
+        <span>TikTok</span>
+      </a>
+      <a href="https://www.instagram.com/lavvtkashi_?psln=cmlraTU0NjM2em5h/" target="_blank" class="social-card ig">
+        <i class="fab fa-instagram"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="https://t.me/slavvtechid" target="_blank" class="social-card tg">
+        <i class="fab fa-telegram-plane"></i>
+        <span>Telegram</span>
+      </a>
+      <a href="https://discord.com/eFFdFWdBzA" target="_blank" class="social-card dc">
+        <i class="fab fa-discord"></i>
+        <span>Discord</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#beranda" class="logo">SLAVVTECH</a>
+    <p>© 2026 - Created By Fadhil Rahmansyah Putra.</p>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const icon = themeBtn.querySelector('i');
+
+    themeBtn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.setAttribute('data-theme', 'light');
+        icon.className = 'fas fa-sun';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        icon.className = 'fas fa-moon';
+      }
+    });
+
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('open'));
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+      link.addEventListener('click', () => navMenu.classList.remove('open'));
+    });
+
+    // Active nav
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (scrollY >= sec.offsetTop - 120) current = sec.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // Scroll Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up, .bio-card, .memory-item').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
