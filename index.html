@@ -1,684 +1,224 @@
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SlavvTech.Id | Personal Portfolio </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
-    :root {
-      --bg: #07070f;
-      --bg-secondary: #0e0e1a;
-      --card: rgba(24, 8, 12, 0.78);
-      --text: #f0f0f8; /* warna putih tetap dipertahankan di mode gelap */
-      --text-muted: #b8a4a8;
-      --primary: #7a0000;
-      --secondary: #b31217;
-      --gold: #4a0000;
-      --accent-rgb: 145, 0, 15;
-      --accent-gradient: linear-gradient(135deg, #2b0000, #650000, #b31217, #7a0000, #3b0000);
-      --border: rgba(145, 0, 15, 0.30);
-      --glow: 0 0 25px rgba(145, 0, 15, 0.42);
-      --radius: 20px;
-    }
-
-    [data-theme="light"] {
-      --bg: #f4f7fb;
-      --bg-secondary: #ffffff;
-      --card: rgba(242, 247, 255, 0.90);
-      --text: #081426;
-      --text-muted: #40526d;
-      --primary: #0b3d91;
-      --secondary: #145da0;
-      --gold: #062b63;
-      --accent-rgb: 11, 61, 145;
-      --accent-gradient: linear-gradient(135deg, #031a3d, #062b63, #0b3d91, #145da0, #082f6b);
-      --border: rgba(11, 61, 145, 0.25);
-      --glow: 0 0 22px rgba(11, 61, 145, 0.32);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      transition: background 0.4s, color 0.4s;
-    }
-instagram
-    /* Background efek */
-    .bg-effects {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .grid-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(var(--accent-rgb), 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(var(--accent-rgb), 0.035) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.3;
-      animation: float 14s ease-in-out infinite;
-    }
-    .orb1 { width: 380px; height: 380px; background: var(--primary); top: -120px; left: -80px; }
-    .orb2 { width: 320px; height: 320px; background: var(--secondary); bottom: 5%; right: -60px; animation-delay: -5s; }
-    .orb3 { width: 220px; height: 220px; background: var(--gold); top: 45%; left: 55%; animation-delay: -9s; }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0,0); }
-      50% { transform: translate(25px, -35px); }
-    }
-
-    /* ===== NAVBAR FUTURISTIK ===== */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(7,7,15,0.7);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      transition: 0.3s;
-    }
-    [data-theme="light"] header {
-      background: rgba(255,255,255,0.75);
-    }
-
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-decoration: none;
-      filter: drop-shadow(0 0 7px rgba(var(--accent-rgb), 0.45));
-    }
-
-    nav ul {
-      display: flex;
-      gap: 2.2rem;
-      list-style: none;
-    }
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.92rem;
-      position: relative;
-      transition: 0.3s;
-      letter-spacing: 0.5px;
-    }
-    nav a:hover, nav a.active {
-      color: var(--primary);
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px; left: 0;
-      width: 0; height: 2px;
-      background: var(--accent-gradient);
-      box-shadow: var(--glow);
-      transition: width 0.35s;
-    }
-    nav a:hover::after, nav a.active::after { width: 100%; }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-    .theme-btn {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      cursor: default;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-    }
-    .theme-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      box-shadow: var(--glow);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: var(--text);
-      transition: 0.3s;
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 110px 5% 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.7rem, 4vw, 2.5rem);
-      text-align: center;
-      margin-bottom: 0.6rem;
-      letter-spacing: 2px;
-    }
-    .section-title span {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .section-sub {
-      text-align: center;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 3rem;
-      font-size: 1rem;
-    }
-
-    /* ===== HERO / BERANDA ===== */
-    #beranda {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 120px;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3.5rem;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-text h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.3rem, 5vw, 3.4rem);
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-    }
-    .hero-text h1 span {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-text .tagline {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      margin-bottom: 1.8rem;
-      max-width: 460px;
-    }
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.85rem 1.9rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.92rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: 0.35s;
-      border: none;
-    }
-    .btn-primary {
-      background: var(--accent-gradient);
-      color: #07070f;
-      box-shadow: var(--glow);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.50);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-    }
-    .btn-outline:hover {
-      background: rgba(var(--accent-rgb), 0.10);
-      box-shadow: var(--glow);
-    }
-
-    .hero-photo {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-    .photo-frame {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 1;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      position: relative;
-      box-shadow: var(--glow);
-    }
-    .photo-frame::before {
-      content: '';
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(from 0deg, transparent, var(--primary), transparent 40%);
-      animation: spin 10s linear infinite;
-    }
-    .photo-frame img {
-      position: absolute;
-      inset: 4px;
-      width: calc(100% - 8px);
-      height: calc(100% - 8px);
-      object-fit: cover;
-      border-radius: 24px;
-      z-index: 1;
-      /* Mode gelap: nuansa merah gelap */
-      filter: sepia(0.35) saturate(1.35) hue-rotate(315deg) brightness(0.82) contrast(1.08);
-      transition: filter 0.55s ease, transform 0.55s ease;
-    }
-
-    /* Mode terang: foto berubah ke nuansa biru gelap */
-    [data-theme="light"] .photo-frame img {
-      filter: sepia(0.28) saturate(1.45) hue-rotate(165deg) brightness(0.92) contrast(1.06);
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ===== BIODATA ===== */
-    .bio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .bio-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      backdrop-filter: blur(14px);
-      transition: 0.4s;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    .bio-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .bio-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--glow);
-      transform: translateY(-6px);
-    }
-    .bio-card i {
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .bio-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.05rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-    }
-    .bio-card p { color: var(--text-muted); font-size: 0.93rem; }
-
-    /* ===== MEMORI ===== */
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.4rem;
-    }
-    .memory-item {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      opacity: 0;
-      transform: scale(0.92);
-      transition: 0.5s;
-    }
-    .memory-item.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .memory-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-    .memory-item:hover img { transform: scale(1.08); }
-    .memory-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(7,7,15,0.85), transparent);
-      display: flex;
-      align-items: flex-end;
-      padding: 1.1rem;
-      opacity: 0;
-      transition: 0.35s;
-    }
-    .memory-item:hover .memory-overlay { opacity: 1; }
-    .memory-overlay span {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-    }
-
-    /* ===== SOSIAL MEDIA ===== */
-    .social-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.3rem;
-    }
-    .social-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.8rem 1.2rem;
-      text-align: center;
-      text-decoration: none;
-      color: var(--text);
-      transition: 0.4s;
-      backdrop-filter: blur(12px);
-    }
-    .social-card:hover {
-      border-color: var(--primary);
-      box-shadow: var(--glow);
-      transform: translateY(-7px);
-    }
-    .social-card i {
-      font-size: 2rem;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
-    .social-card.ig i { color: #e1306c; }
-    .social-card.tw i { color: #1da1f2; }
-    .social-card.yt i { color: #ff0000; }
-    .social-card.li i { color: #0a66c2; }
-    .social-card.gh i { color: #f0f0f8; }
-    .social-card.wa i { color: #25d366; }
-    .social-card span {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2.5rem 5%;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.88rem;
-    }
-    footer .logo {
-      display: inline-block;
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-    }
-
-    /* Animasi */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(35px);
-      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Mobile */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-text .tagline { margin-left: auto; margin-right: auto; }
-      .hero-btns { justify-content: center; }
-      .hero-photo { order: -1; }
-      nav ul {
-        position: fixed;
-        top: 70px; left: 0; right: 0;
-        background: var(--bg-secondary);
-        flex-direction: column;
-        padding: 1.8rem;
-        gap: 1.3rem;
-        border-bottom: 1px solid var(--border);
-        transform: translateY(-160%);
-        transition: 0.4s;
-        z-index: 999;
-      }
-      nav ul.open { transform: translateY(0); }
-      .hamburger { display: flex; }
-    }
-    @media (max-width: 500px) {
-      section { padding: 90px 1.2rem 60px; }
-      .btn { width: 100%; justify-content: center; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080a12">
+<title>SlavvTech.Id — Personal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+ --bg:#080a12;--bg2:#0e1220;--text:#f4f6ff;--muted:#a2abc0;
+ --glass:rgba(255,255,255,.075);--glass-strong:rgba(255,255,255,.115);
+ --stroke:rgba(255,255,255,.14);--accent:#a9b8ff;--accent2:#75dfd0;
+ --shadow:0 22px 65px rgba(0,0,0,.35);--glow:0 0 32px rgba(130,151,255,.16);
+ --sidebar:rgba(12,15,26,.68);--radius:23px;
+}
+[data-theme="light"]{
+ --bg:#eaf0fa;--bg2:#f5f8ff;--text:#172139;--muted:#68748e;
+ --glass:rgba(255,255,255,.53);--glass-strong:rgba(255,255,255,.76);
+ --stroke:rgba(53,70,110,.15);--accent:#526de0;--accent2:#269d9a;
+ --shadow:0 22px 65px rgba(65,83,125,.13);--glow:0 0 32px rgba(82,109,224,.12);
+ --sidebar:rgba(245,248,255,.72);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;background:
+ radial-gradient(ellipse at 82% 4%,rgba(107,125,226,.20),transparent 33%),
+ radial-gradient(ellipse at 4% 88%,rgba(55,175,163,.13),transparent 32%),var(--bg);
+ transition:background .35s,color .35s;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.24;z-index:-1;background-image:linear-gradient(var(--stroke) 1px,transparent 1px),linear-gradient(90deg,var(--stroke) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.shell{min-height:100vh}
+.sidebar{position:fixed;z-index:20;left:17px;top:17px;bottom:17px;width:252px;padding:22px 16px;border:1px solid var(--stroke);border-radius:28px;background:var(--sidebar);backdrop-filter:blur(28px) saturate(145%);-webkit-backdrop-filter:blur(28px) saturate(145%);box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .28s}
+.brand{display:flex;align-items:center;gap:12px;padding:3px 8px 27px}
+.brand-mark{width:43px;height:43px;display:grid;place-items:center;border-radius:15px;color:#111827;font-weight:900;font-family:Orbitron;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 28px rgba(130,151,255,.25)}
+.brand b{font-family:Orbitron;font-size:13px;letter-spacing:1px;display:block}.brand small{font-size:11px;color:var(--muted)}
+.nav-caption{font-size:10px;letter-spacing:2px;color:var(--muted);padding:10px 12px}
+.nav{display:grid;gap:6px}.nav a{display:flex;align-items:center;gap:13px;padding:12px 13px;border:1px solid transparent;border-radius:14px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;transition:.2s}
+.nav a i{width:19px;text-align:center;font-size:15px}.nav a:hover,.nav a.active{color:var(--text);background:var(--glass-strong);border-color:var(--stroke);box-shadow:inset 3px 0 var(--accent)}
+.sidebar-bottom{margin-top:auto}.theme-side{width:100%;display:flex;align-items:center;gap:12px;padding:12px 13px;color:var(--muted);border:1px solid var(--stroke);border-radius:14px;background:var(--glass);text-align:left}
+.mini-profile{display:flex;align-items:center;gap:10px;padding:16px 7px 2px;margin-top:15px;border-top:1px solid var(--stroke)}
+.mini-avatar{width:36px;height:36px;border-radius:12px;object-fit:cover;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.mini-profile b{font-size:12px;display:block}.mini-profile small{font-size:10px;color:var(--muted)}
+main{margin-left:286px;padding:27px 34px 50px;max-width:1600px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:27px}
+.breadcrumb{font-size:10px;letter-spacing:2px;color:var(--muted)}.top-title{font-weight:700;margin-top:4px;font-size:14px}
+.top-actions{display:flex;gap:9px;align-items:center}
+.glass-btn,.btn{border:1px solid var(--stroke);border-radius:13px;padding:10px 14px;background:var(--glass);color:var(--text);backdrop-filter:blur(16px);transition:.2s}
+.glass-btn:hover{background:var(--glass-strong);transform:translateY(-1px)}
+.primary{border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#101728;font-weight:800}
+.mobile-toggle{display:none}
+.page{display:none;animation:appear .3s ease}.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:800;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(31px,4.4vw,53px);line-height:1.12;letter-spacing:-2px;margin:10px 0 14px}
+h2{font-size:21px;letter-spacing:-.5px;margin:0 0 13px}h3{font-size:15px;margin:0 0 8px}
+p{margin-top:0}.muted{color:var(--muted)}.lead{font-size:15px;line-height:1.8;color:var(--muted);max-width:680px}
+.glass{border:1px solid var(--stroke);border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:17px}.hero-copy{padding:34px;min-height:310px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-copy:after{content:"";position:absolute;width:260px;height:260px;right:-100px;bottom:-150px;border-radius:50%;background:var(--accent);filter:blur(85px);opacity:.2}
+.hero-copy>*{position:relative;z-index:1}.hero h1 span,.gradient{background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.hero-buttons a{text-decoration:none}
+.hero-profile{padding:25px;display:flex;flex-direction:column;justify-content:space-between;min-height:310px;background:linear-gradient(145deg,rgba(135,154,255,.13),rgba(91,213,195,.07)),var(--glass)}
+.profile-photo{width:100px;height:100px;border-radius:26px;object-fit:cover;border:1px solid var(--stroke);box-shadow:var(--glow)}
+.profile-initial{width:100px;height:100px;border-radius:26px;display:grid;place-items:center;font-size:35px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#101728}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:16px}.stat{padding:17px 19px}.stat strong{font-size:23px;display:block}.stat small{color:var(--muted);font-size:11px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:29px 0 14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tile{padding:20px}.tile-icon{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:var(--glass-strong);color:var(--accent);margin-bottom:14px}
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:15px}.pad{padding:24px}.bio-card{padding:20px}.bio-card i{font-size:20px;color:var(--accent);margin-bottom:13px}.bio-card p{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:0}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.tag{font-size:11px;color:var(--muted);padding:7px 10px;border-radius:99px;border:1px solid var(--stroke);background:var(--glass)}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.photo-card{overflow:hidden}.photo-card img{width:100%;height:190px;object-fit:cover;display:block}.photo-caption{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:11px 13px;font-size:12px}
+.upload{padding:20px;text-align:center;border:1px dashed var(--stroke);border-radius:18px;background:var(--glass)}.upload i{font-size:24px;color:var(--accent);margin-bottom:8px}
+.field{width:100%;padding:11px 13px;border:1px solid var(--stroke);border-radius:12px;background:var(--glass);color:var(--text);outline:none}.field:focus{border-color:var(--accent)}textarea.field{min-height:90px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.form-grid .wide{grid-column:1/-1}
+.social-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.social-card{padding:20px;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:13px;transition:.2s}.social-card:hover{transform:translateY(-3px);background:var(--glass-strong)}.social-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:var(--glass-strong);font-size:19px;color:var(--accent)}.social-card small{display:block;color:var(--muted);font-size:10px;overflow-wrap:anywhere}
+.file-list{display:grid;gap:10px;margin-top:15px}.file-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px}.file-info{display:flex;align-items:center;gap:12px;min-width:0}.file-icon{width:40px;height:40px;flex-shrink:0;border-radius:12px;background:var(--glass-strong);display:grid;place-items:center;color:var(--accent)}.file-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}.file-name small{display:block;color:var(--muted);font-weight:400;margin-top:3px}.file-actions{display:flex;gap:7px}
+.calendar-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.calendar-card,.agenda-card{padding:21px}.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}.cal-grid span,.cal-grid button{padding:9px 2px;border-radius:10px;font-size:12px}.cal-grid .weekday{color:var(--muted);font-size:10px}.cal-grid button{border:1px solid transparent;background:transparent;color:var(--text)}.cal-grid button:hover{background:var(--glass-strong)}.cal-grid button.today{border-color:var(--accent)}.cal-grid button.selected{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#101728;font-weight:800}
+.agenda-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border:1px solid var(--stroke);border-radius:13px;background:var(--glass);font-size:12px;margin-top:8px}
+.runtime{font-size:clamp(26px,4vw,43px);font-weight:800;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px}
+footer{text-align:center;color:var(--muted);font-size:11px;margin-top:38px}
+@media(max-width:1000px){main{margin-left:270px;padding:24px 22px}.hero{grid-template-columns:1fr}.hero-profile{min-height:230px}.gallery{grid-template-columns:repeat(2,1fr)}.social-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.sidebar{transform:translateX(-120%);left:10px;top:10px;bottom:10px;width:min(285px,86vw)}.sidebar.open{transform:translateX(0)}main{margin:0;padding:17px 14px 35px}.mobile-toggle{display:inline-flex}.topbar{margin-bottom:20px}.hero-copy{padding:25px;min-height:280px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:19px}.grid3,.about-grid,.calendar-layout{grid-template-columns:1fr}.social-grid{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-card img{height:150px}.pad{padding:19px}}
+@media(max-width:420px){.social-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.file-row{align-items:flex-start}.file-actions{flex-direction:column}}
+</style>
 </head>
 <body>
-  <div class="bg-effects">
-    <div class="grid-bg"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="brand-mark">S</div><div><b>SLAVVTECH.ID</b><small>Personal portfolio</small></div></div>
+ <div class="nav-caption">WORKSPACE</div>
+ <nav class="nav">
+  <a href="#home" class="active" data-page="home"><i class="fa-solid fa-house"></i> Home</a>
+  <a href="#about" data-page="about"><i class="fa-regular fa-user"></i> About</a>
+  <a href="#pictures" data-page="pictures"><i class="fa-regular fa-images"></i> Pictures</a>
+  <a href="#social" data-page="social"><i class="fa-solid fa-share-nodes"></i> Sosial Media</a>
+  <a href="#documents" data-page="documents"><i class="fa-regular fa-folder-open"></i> Dokumen</a>
+  <a href="#calendar" data-page="calendar"><i class="fa-regular fa-calendar-days"></i> Kalender</a>
+ </nav>
+ <div class="sidebar-bottom">
+  <div class="nav-caption">APPEARANCE</div>
+  <button class="theme-side" id="themeSide"><i class="fa-regular fa-moon"></i><span>Ganti mode tampilan</span></button>
+  <div class="mini-profile"><div class="profile-initial" id="miniInitial">F</div><div><b>Fadhil Rahmansyah</b><small>Portfolio owner</small></div></div>
+ </div>
+</aside>
+<main>
+ <header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px"><button class="glass-btn mobile-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button><div><div class="breadcrumb">SLAVVTECH / <span id="crumb">HOME</span></div><div class="top-title">Personal workspace <span style="color:var(--accent)">✦</span></div></div></div>
+  <div class="top-actions"><button class="glass-btn" id="themeTop"><i class="fa-regular fa-moon"></i> <span id="themeLabel">Dark mode</span></button></div>
+ </header>
+
+ <section class="page active" id="home">
+  <div class="hero">
+   <div class="glass hero-copy"><div class="eyebrow">WELCOME TO MY PERSONAL SPACE</div><h1>Welcome to <span>SlavvTech.</span></h1><p class="lead">SlavvTech.Id adalah personal portfolio website untuk memperkenalkan diri, membagikan momen, dan menyimpan berbagai dokumen dalam satu ruang digital yang elegan.</p><div class="hero-buttons"><a class="btn primary" href="#about" data-go="about"><i class="fa-regular fa-user"></i> About Me</a><a class="btn" href="#pictures" data-go="pictures"><i class="fa-regular fa-images"></i> Explore Pictures</a></div></div>
+   <div class="glass hero-profile"><div class="eyebrow">PROFILE OVERVIEW</div><div class="profile-initial" style="width:104px;height:104px;font-size:37px">F</div><div><h2>Fadhil Rahmansyah Putra</h2><p class="muted" style="font-size:12px;margin:0">Student · Tech Enthusiast · Creator</p></div></div>
   </div>
+  <div class="stats"><div class="glass stat"><strong id="photoCount">6</strong><small>Foto di gallery</small></div><div class="glass stat"><strong id="docCount">0</strong><small>Dokumen tersimpan</small></div><div class="glass stat"><strong id="uptime">00:00:00</strong><small>Website runtime</small></div></div>
+  <div class="section-head"><div><div class="eyebrow">QUICK ACCESS</div><h2>Explore workspace</h2></div></div>
+  <div class="grid3"><article class="glass tile"><div class="tile-icon"><i class="fa-regular fa-id-card"></i></div><h3>About me</h3><p class="muted" style="font-size:12px">Kenali profil, pendidikan, dan minat saya.</p><button class="glass-btn" data-go="about">Open About ↗</button></article><article class="glass tile"><div class="tile-icon"><i class="fa-regular fa-images"></i></div><h3>My pictures</h3><p class="muted" style="font-size:12px">Lihat koleksi foto dan tambahkan gambar baru.</p><button class="glass-btn" data-go="pictures">Open Gallery ↗</button></article><article class="glass tile"><div class="tile-icon"><i class="fa-regular fa-calendar"></i></div><h3>Calendar</h3><p class="muted" style="font-size:12px">Buat agenda dan tandai tanggal penting.</p><button class="glass-btn" data-go="calendar">Open Calendar ↗</button></article></div>
+ </section>
 
-  <!-- Navbar -->
-  <header>
-    <a href="#beranda" class="logo">SlavvTech.Id</a>
-    <nav>
-      <ul id="nav-menu">
-        <li><a href="#beranda" class="active">Home</a></li>
-        <li><a href="#biodata">About</a></li>
-        <li><a href="#memori">Pictures</a></li>
-        <li><a href="#sosial">Social Media</a></li>
-      </ul>
-    </nav>
-    <div class="nav-right">
-      <button class="theme-btn" id="theme-toggle" title="Ganti Mode">
-        <i class="fas fa-moon"></i>
-      </button>
-      <button class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+ <section class="page" id="about">
+  <div class="eyebrow">GET TO KNOW ME</div><h1>About <span class="gradient">Me.</span></h1><p class="lead">Sedikit tentang siapa saya, pendidikan, minat, dan hal yang sedang saya pelajari.</p>
+  <div class="about-grid" style="margin-top:22px">
+   <div style="display:grid;gap:13px">
+    <article class="glass bio-card"><i class="fa-solid fa-graduation-cap"></i><h3>Pendidikan</h3><p>Siswa pada sekolah SMK Informatika Bina Generasi 1, Jurusan Teknik Komputer dan Jaringan.</p></article>
+    <article class="glass bio-card"><i class="fa-solid fa-heart"></i><h3>Minat & Keahlian</h3><p>Programmer, IT Support, Cybersecurity, Cloud Engineer, Web Developer, Teknisi Komputer, Graphic Designer, Video Editor, Creator, Brand Designer, dan Playing Games.</p><div class="tags"><span class="tag">Technology</span><span class="tag">Networking</span><span class="tag">Web Development</span><span class="tag">Creative</span></div></article>
+    <article class="glass bio-card"><i class="fa-solid fa-location-dot"></i><h3>Lokasi</h3><p>Bogor, Jawa Barat, Indonesia.</p></article>
+   </div>
+   <div class="glass pad"><div class="eyebrow">A LITTLE NOTE</div><h2>Always learning.</h2><p class="muted" style="font-size:13px;line-height:1.9">Saya tertarik dengan dunia teknologi dan pengembangan digital. Saya senang mencoba hal baru, membangun sesuatu, dan terus mengembangkan kemampuan di bidang IT.</p><div class="tags"><span class="tag">Curious mind</span><span class="tag">Problem solver</span><span class="tag">Creative learner</span></div></div>
+  </div>
+ </section>
 
-  <!-- BERANDA -->
-  <section id="beranda">
-    <div class="hero">
-      <div class="hero-text fade-up">
-        <h1>Welcome To <span>SlavvTech.</span></h1>
-        <p class="tagline">SlavvTech.Id adalah personal portfolio website yang dibuat untuk memperkenalkan diri secara lebih menarik dan modern.</p>
-        <div class="hero-btns">
-          <a href="#biodata" class="btn btn-primary"><i class="fas fa-user"></i> About Me!</a>
-          <a href="#memori" class="btn btn-outline"><i class="fas fa-images"></i> Pictures!</a>
-        </div>
-      </div>
-      <div class="hero-photo fade-up">
-        <div class="photo-frame">
-          <img src="https://cdn.phototourl.com/member/2026-10-29-b51d9069-87e9-4831-9eff-17ea8728fad3.png" alt="Profil" />
-        </div>
-      </div>
-    </div>
-  </section>
+ <section class="page" id="pictures">
+  <div class="eyebrow">MY VISUAL COLLECTION</div><h1>Pic<span class="gradient">tures.</span></h1><p class="lead">Kumpulan random image, kisah, momen, dan hal-hal yang berharga. Tambahkan foto baru kapan saja.</p>
+  <div class="glass upload" style="margin-top:20px"><i class="fa-solid fa-cloud-arrow-up"></i><h3>Upload foto ke website</h3><p class="muted" style="font-size:12px">Foto yang ditambahkan disimpan di browser perangkat ini.</p><input id="photoUpload" type="file" accept="image/*" multiple></div>
+  <div class="section-head"><h2>Gallery collection</h2><span class="muted" id="galleryCount">6 items</span></div>
+  <div class="gallery" id="gallery">
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-34368c64-d49f-4aa0-afe1-6a2a89f1bd01.jpg" alt="Keysa Face 1"><div class="photo-caption"><span>Keysa Face #1</span><span>✦</span></div></div>
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-02213d99-6ae3-4e97-b893-d1113f565792.jpg" alt="Keysa Face 2"><div class="photo-caption"><span>Keysa Face #2</span><span>✦</span></div></div>
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-4f073a7d-88ea-4424-b0d8-5044db596b44.jpg" alt="Keysa Face 3"><div class="photo-caption"><span>Keysa Face #3</span><span>✦</span></div></div>
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-a65610dc-1df4-4047-b067-85991628ae89.jpg" alt="Keysa Face 4"><div class="photo-caption"><span>Keysa Face #4</span><span>✦</span></div></div>
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-9da06c70-011c-48d3-bba3-edeb42560646.jpg" alt="Keysa Face 5"><div class="photo-caption"><span>Keysa Face #5</span><span>✦</span></div></div>
+   <div class="glass photo-card"><img src="https://cdn.phototourl.com/member/2026-10-29-d05f29c5-3427-4060-bb2e-3fb0a5849a65.webp" alt="Keysa Face 6"><div class="photo-caption"><span>Keysa Face #6</span><span>✦</span></div></div>
+  </div>
+ </section>
 
-  <!-- BIODATA -->
-  <section id="biodata">
-    <h2 class="section-title fade-up">Ab<span>out</span> Me</h2>
-    <p class="section-sub fade-up">Biodata ini merupakan gambaran singkat tentang diri saya, mulai dari pendidikan, minat, dan tempat saya tinggal.</p>
-    <div class="bio-grid">
-      <div class="bio-card">
-        <i class="fas fa-user-graduate"></i>
-        <h3>Pendidikan</h3>
-        <p>Siswa pada sekolah Smk Informatika Bina Generasi 1, Jurusan Teknik Komputer dan Jaringan.</p>
-      </div>
-      <div class="bio-card">
-        <i class="fas fa-heart"></i>
-        <h3>Minat</h3>
-        <p>Programmer, IT Support, Cybersecurity, Cloud Engineer, Web Developer, Teknisi Komputer, Graphic Designer, Video Editor, Creator, Brand Designer and Playing Games.</p>
-      </div>
-      <div class="bio-card">
-        <i class="fas fa-map-marker-alt"></i>
-        <h3>Lokasi</h3>
-        <p>Indonesia, Jawa Barat, Bogor, Ciomas, Laladon Kadoya</p>
-      </div>
-    </div>
-  </section>
+ <section class="page" id="social">
+  <div class="eyebrow">LET'S CONNECT</div><h1>Sosial <span class="gradient">Media.</span></h1><p class="lead">Temukan dan hubungi saya melalui beberapa platform sosial media.</p>
+  <div class="social-grid" style="margin-top:22px">
+   <a class="glass social-card" href="https://wa.me/6281319437700" target="_blank" rel="noopener"><span class="social-icon"><i class="fa-brands fa-whatsapp"></i></span><span><b>WhatsApp</b><small>Chat with me ↗</small></span></a>
+   <a class="glass social-card" href="https://www.tiktok.com/@lavvvkeysh4_" target="_blank" rel="noopener"><span class="social-icon"><i class="fa-brands fa-tiktok"></i></span><span><b>TikTok</b><small>@lavvvkeysh4_ ↗</small></span></a>
+   <a class="glass social-card" href="https://www.instagram.com/lavvtkashi_?psln=cmlraTU0NjM2em5h/" target="_blank" rel="noopener"><span class="social-icon"><i class="fa-brands fa-instagram"></i></span><span><b>Instagram</b><small>@lavvtkashi_ ↗</small></span></a>
+   <a class="glass social-card" href="https://t.me/slavvtechid" target="_blank" rel="noopener"><span class="social-icon"><i class="fa-brands fa-telegram"></i></span><span><b>Telegram</b><small>@slavvtechid ↗</small></span></a>
+   <a class="glass social-card" href="https://discord.com/eFFdFWdBzA" target="_blank" rel="noopener"><span class="social-icon"><i class="fa-brands fa-discord"></i></span><span><b>Discord</b><small>Join my space ↗</small></span></a>
+  </div>
+ </section>
 
-  <!-- MEMORI -->
-  <section id="memori">
-    <h2 class="section-title fade-up">Pic<span>tures</span></h2>
-    <p class="section-sub fade-up">Kumpulan Random Image My Kisah, My Fineshyt, My Bini, My World, My Future.</p>
-    <div class="memory-grid">
-      <!-- Ganti link photo1.html dst sesuai file yang kamu buat -->
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-34368c64-d49f-4aa0-afe1-6a2a89f1bd01.jpg" alt="Keysa Cantik" />
-        <div class="memory-overlay"><span>Keysa Face #1</span></div>
-      </div>
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-02213d99-6ae3-4e97-b893-d1113f565792.jpg" alt="Keysa Cantik" />
-        <div class="memory-overlay"><span>Keysa Face #2</span></div>
-      </div>
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-4f073a7d-88ea-4424-b0d8-5044db596b44.jpg" alt="Keysa Cantik" />
-        <div class="memory-overlay"><span>Keysa Face #3</span></div>
-      </div>
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-a65610dc-1df4-4047-b067-85991628ae89.jpg" alt="Keysa Cantik" />
-        <div class="memory-overlay"><span>Keysa Face #4</span></div>
-      </div>
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-9da06c70-011c-48d3-bba3-edeb42560646.jpg" alt="Keysa Cantik" />
-        <div class="memory-overlay"><span>Keysa Face #5</span></div>
-      </div>
-      <div class="memory-item">
-        <img src="https://cdn.phototourl.com/member/2026-10-29-d05f29c5-3427-4060-bb2e-3fb0a5849a65.webp" alt="Keysa Face" />
-        <div class="memory-overlay"><span>Keysa Face #6</span></div>
-      </div>
-    </div>
-  </section>
+ <section class="page" id="documents">
+  <div class="eyebrow">PERSONAL FILE STORAGE</div><h1>My <span class="gradient">Documents.</span></h1><p class="lead">Unggah dan kelola dokumen dari satu tempat. File bisa dibuka atau diunduh kembali melalui browser ini.</p>
+  <div class="glass upload" style="margin-top:20px"><i class="fa-solid fa-file-arrow-up"></i><h3>Upload dokumen</h3><p class="muted" style="font-size:12px">PDF, DOCX, XLSX, ZIP, TXT, dan format file lainnya.</p><input id="documentUpload" type="file" multiple></div>
+  <div class="section-head"><h2>File tersimpan</h2><span class="muted" id="documentCount">0 file</span></div><div class="file-list" id="fileList"><div class="glass empty">Belum ada dokumen. Pilih file untuk mulai menyimpan.</div></div>
+ </section>
 
-  <!-- SOSIAL MEDIA -->
-  <section id="sosial">
-    <h2 class="section-title fade-up">Social <span>Media</span></h2>
-    <p class="section-sub fade-up">Saya juga menggunakan beberapa media sosial</p>
-    <div class="social-grid">
-      <a href="https://wa.me/6281319437700" target="_blank" class="social-card wa">
-        <i class="fab fa-whatsapp"></i>
-        <span>WhatsApp</span>
-      </a>
-      <a href="https://www.tiktok.com/@lavvvkeysh4_" target="_blank" class="social-card tt">
-        <i class="fab fa-tiktok"></i>
-        <span>TikTok</span>
-      </a>
-      <a href="https://www.instagram.com/lavvtkashi_?psln=cmlraTU0NjM2em5h/" target="_blank" class="social-card ig">
-        <i class="fab fa-instagram"></i>
-        <span>Instagram</span>
-      </a>
-      <a href="https://t.me/slavvtechid" target="_blank" class="social-card tg">
-        <i class="fab fa-telegram-plane"></i>
-        <span>Telegram</span>
-      </a>
-      <a href="https://discord.com/eFFdFWdBzA" target="_blank" class="social-card dc">
-        <i class="fab fa-discord"></i>
-        <span>Discord</span>
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <a href="#beranda" class="logo">SLAVVTECH</a>
-    <p>© 2026 - Created By Fadhil Rahmansyah Putra.</p>
-  </footer>
-
-  <script>
-    // Theme Toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    const icon = themeBtn.querySelector('i');
-
-    themeBtn.addEventListener('click', () => {
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        html.setAttribute('data-theme', 'light');
-        icon.className = 'fas fa-sun';
-      } else {
-        html.setAttribute('data-theme', 'dark');
-        icon.className = 'fas fa-moon';
-      }
-    });
-
-    // Mobile Menu
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('open'));
-    document.querySelectorAll('#nav-menu a').forEach(link => {
-      link.addEventListener('click', () => navMenu.classList.remove('open'));
-    });
-
-    // Active nav
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (scrollY >= sec.offsetTop - 120) current = sec.id;
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
-      });
-    });
-
-    // Scroll Animation
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-up, .bio-card, .memory-item').forEach(el => observer.observe(el));
-  </script>
+ <section class="page" id="calendar">
+  <div class="eyebrow">PLAN YOUR DAYS</div><h1>Calendar <span class="gradient">& Planner.</span></h1><p class="lead">Kalender sederhana untuk melihat tanggal dan mencatat agenda penting.</p>
+  <div class="glass pad" style="margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><div class="eyebrow">LOCAL TIME</div><div class="runtime" id="clock">00:00:00</div><small class="muted" id="dateToday"></small></div><div><div class="eyebrow">WEBSITE RUNTIME</div><div class="runtime" id="runtime">00:00:00</div><small class="muted">Sejak halaman pertama dibuka</small></div></div>
+  <div class="calendar-layout" style="margin-top:15px">
+   <div class="glass calendar-card"><div class="cal-head"><button class="glass-btn" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button><h2 id="monthTitle" style="margin:0">Month Year</h2><button class="glass-btn" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button></div><div class="cal-grid" id="calendarGrid"></div></div>
+   <div class="glass agenda-card"><div class="eyebrow">YOUR SCHEDULE</div><h2 id="selectedDate">Agenda</h2><div style="display:flex;gap:8px;margin:12px 0"><input class="field" id="agendaInput" placeholder="Tulis agenda..."><button class="btn primary" id="addAgenda">Add</button></div><div id="agendaList"><div class="empty">Belum ada agenda untuk tanggal ini.</div></div></div>
+  </div>
+ </section>
+ <footer>© 2026 SlavvTech.Id · Created with care.</footer>
+</main>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+// Sidebar navigation
+function navigate(id){$$('.page').forEach(p=>p.classList.toggle('active',p.id===id));$$('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.page===id));$('#crumb').textContent=id.toUpperCase();$('#sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});}
+$$('.nav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigate(a.dataset.page)}));
+$$('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();navigate(b.dataset.go)}));
+$('#menuToggle').onclick=()=>$('#sidebar').classList.toggle('open');
+// Liquid glass theme remains active in both palettes
+function setTheme(theme){document.documentElement.dataset.theme=theme;localStorage.setItem('slavv-theme',theme);const light=theme==='light';$('#themeLabel').textContent=light?'Light mode':'Dark mode';const icon=light?'fa-sun':'fa-moon';$('#themeTop i').className='fa-regular '+icon;$('#themeSide i').className='fa-regular '+icon;}
+setTheme(localStorage.getItem('slavv-theme')||'dark');
+function toggleTheme(){setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark')}
+$('#themeTop').onclick=toggleTheme;$('#themeSide').onclick=toggleTheme;
+// Runtime clock
+const startKey='slavv-runtime-start';if(!localStorage.getItem(startKey))localStorage.setItem(startKey,Date.now());
+const startTime=Number(localStorage.getItem(startKey));
+function tick(){const now=new Date(),elapsed=Math.max(0,Math.floor((Date.now()-startTime)/1000));const pad=n=>String(n).padStart(2,'0');const h=pad(Math.floor(elapsed/3600)),m=pad(Math.floor(elapsed%3600/60)),s=pad(elapsed%60);$('#runtime').textContent=`${h}:${m}:${s}`;$('#uptime').textContent=`${h}:${m}:${s}`;$('#clock').textContent=now.toLocaleTimeString('id-ID');$('#dateToday').textContent=now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
+tick();setInterval(tick,1000);
+// IndexedDB: persistent local files/photos without filling localStorage
+let db;
+const request=indexedDB.open('SlavvPortfolioDB',1);
+request.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('assets'))d.createObjectStore('assets',{keyPath:'id',autoIncrement:true});};
+request.onsuccess=e=>{db=e.target.result;renderAssets();};
+request.onerror=()=>{console.warn('IndexedDB tidak tersedia di browser ini.');};
+function storeAsset(record){return new Promise((resolve,reject)=>{const tx=db.transaction('assets','readwrite');tx.objectStore('assets').add(record);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
+function getAssets(){return new Promise((resolve,reject)=>{const tx=db.transaction('assets','readonly'),r=tx.objectStore('assets').getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+function deleteAsset(id){return new Promise((resolve,reject)=>{const tx=db.transaction('assets','readwrite');tx.objectStore('assets').delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
+function prettySize(bytes){if(bytes<1024)return bytes+' B';if(bytes<1048576)return (bytes/1024).toFixed(1)+' KB';return (bytes/1048576).toFixed(1)+' MB';}
+async function renderAssets(){if(!db)return;const assets=await getAssets();const gallery=$('#gallery'),files=$('#fileList');gallery.querySelectorAll('[data-uploaded="true"]').forEach(n=>n.remove());files.innerHTML='';let photoCount=gallery.querySelectorAll('.photo-card').length;let docCount=0;
+ for(const item of assets){const url=URL.createObjectURL(item.blob);if(item.kind==='photo'){photoCount++;const card=document.createElement('div');card.className='glass photo-card';card.dataset.uploaded='true';const img=document.createElement('img');img.src=url;img.alt=item.name;const cap=document.createElement('div');cap.className='photo-caption';const name=document.createElement('span');name.textContent=item.name;const del=document.createElement('button');del.className='glass-btn';del.textContent='Hapus';del.onclick=async()=>{await deleteAsset(item.id);renderAssets()};cap.append(name,del);card.append(img,cap);gallery.append(card);}else{docCount++;const row=document.createElement('div');row.className='glass file-row';const info=document.createElement('div');info.className='file-info';const icon=document.createElement('div');icon.className='file-icon';icon.innerHTML='<i class="fa-regular fa-file-lines"></i>';const name=document.createElement('div');name.className='file-name';name.textContent=item.name;const meta=document.createElement('small');meta.textContent=prettySize(item.size);name.append(meta);info.append(icon,name);const actions=document.createElement('div');actions.className='file-actions';const open=document.createElement('button');open.className='glass-btn';open.textContent='Buka';open.onclick=()=>window.open(url,'_blank','noopener');const download=document.createElement('a');download.className='glass-btn';download.textContent='Unduh';download.href=url;download.download=item.name;const del=document.createElement('button');del.className='glass-btn';del.textContent='Hapus';del.onclick=async()=>{await deleteAsset(item.id);renderAssets()};actions.append(open,download,del);row.append(info,actions);files.append(row);}}
+ if(!docCount)files.innerHTML='<div class="glass empty">Belum ada dokumen. Pilih file untuk mulai menyimpan.</div>';
+ $('#photoCount').textContent=photoCount;$('#galleryCount').textContent=photoCount+' foto';$('#docCount').textContent=docCount;$('#documentCount').textContent=docCount+' file';
+}
+async function handleUpload(input,kind){if(!db){alert('Penyimpanan lokal belum siap. Coba muat ulang halaman.');return;}for(const file of input.files){if(kind==='photo'&&!file.type.startsWith('image/'))continue;try{await storeAsset({kind,name:file.name,size:file.size,type:file.type,blob:file,created:Date.now()});}catch(err){alert('File gagal disimpan. Periksa ruang penyimpanan browser.');break;}}input.value='';renderAssets();}
+$('#photoUpload').addEventListener('change',e=>handleUpload(e.target,'photo'));
+$('#documentUpload').addEventListener('change',e=>handleUpload(e.target,'document'));
+// Calendar + local agenda
+let shown=new Date(),chosen=new Date();let agenda=JSON.parse(localStorage.getItem('slavv-agenda')||'{}');
+const monthNames=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const dateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function drawCalendar(){const y=shown.getFullYear(),m=shown.getMonth(),grid=$('#calendarGrid');$('#monthTitle').textContent=monthNames[m]+' '+y;grid.innerHTML='';['Min','Sen','Sel','Rab','Kam','Jum','Sab'].forEach(day=>{const el=document.createElement('span');el.className='weekday';el.textContent=day;grid.append(el);});for(let i=0;i<new Date(y,m,1).getDay();i++)grid.append(document.createElement('span'));for(let n=1;n<=new Date(y,m+1,0).getDate();n++){const d=new Date(y,m,n),btn=document.createElement('button');btn.textContent=n;if(dateKey(d)===dateKey(new Date()))btn.classList.add('today');if(dateKey(d)===dateKey(chosen))btn.classList.add('selected');if((agenda[dateKey(d)]||[]).length)btn.style.textDecoration='underline';btn.onclick=()=>{chosen=d;drawCalendar()};grid.append(btn);}$('#selectedDate').textContent=chosen.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});drawAgenda();}
+function drawAgenda(){const root=$('#agendaList'),items=agenda[dateKey(chosen)]||[];root.innerHTML='';if(!items.length){root.innerHTML='<div class="empty">Belum ada agenda untuk tanggal ini.</div>';return;}items.forEach((item,index)=>{const row=document.createElement('div');row.className='agenda-item';const text=document.createElement('span');text.textContent=item;const del=document.createElement('button');del.className='glass-btn';del.textContent='Hapus';del.onclick=()=>{items.splice(index,1);agenda[dateKey(chosen)]=items;localStorage.setItem('slavv-agenda',JSON.stringify(agenda));drawCalendar()};row.append(text,del);root.append(row);});}
+$('#prevMonth').onclick=()=>{shown.setMonth(shown.getMonth()-1);drawCalendar()};$('#nextMonth').onclick=()=>{shown.setMonth(shown.getMonth()+1);drawCalendar()};
+$('#addAgenda').onclick=()=>{const val=$('#agendaInput').value.trim();if(!val)return;const key=dateKey(chosen);agenda[key]??=[];agenda[key].push(val);localStorage.setItem('slavv-agenda',JSON.stringify(agenda));$('#agendaInput').value='';drawCalendar();};$('#agendaInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#addAgenda').click()});
+drawCalendar();
+</script>
 </body>
 </html>
