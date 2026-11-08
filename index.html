@@ -306,13 +306,13 @@
       border-radius: 24px;
       z-index: 1;
       /* Mode gelap: nuansa merah gelap */
-      filter: sepia(0.35) saturate(1.35) hue-rotate(315deg) brightness(0.82) contrast(1.08);
+      filter: none;
       transition: filter 0.55s ease, transform 0.55s ease;
     }
 
     /* Mode terang: foto berubah ke nuansa biru gelap */
     [data-theme="light"] .photo-frame img {
-      filter: sepia(0.28) saturate(1.45) hue-rotate(165deg) brightness(0.92) contrast(1.06);
+      filter: none;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -672,7 +672,7 @@
       color: #a9dcff !important;
     }
     .photo-frame img, [data-theme="light"] .photo-frame img {
-      filter: grayscale(1) brightness(.78) contrast(1.05);
+      filter: none;
     }
     .photo-frame::before { background: conic-gradient(from 0deg, transparent, rgba(210,220,230,.45), transparent 40%); }
     .memory-overlay { background: linear-gradient(to top, rgba(0,0,0,.88), transparent); }
@@ -797,7 +797,7 @@
   .page-progress span { background:linear-gradient(90deg,#687887,#b5c2cf) !important; box-shadow:none !important; }
   .social-card.ig i,.social-card.tw i,.social-card.yt i,.social-card.li i,.social-card.gh i,
   .social-card.wa i,.social-card.tt i,.social-card.tg i,.social-card.dc i { color:var(--text-muted) !important; }
-  .photo-frame img,.memory-item img { filter:grayscale(1) brightness(.82) contrast(1.04) !important; }
+  .photo-frame img,.memory-item img { filter:none !important; }
   .photo-frame::before { background:conic-gradient(from 0deg,transparent,rgba(190,210,230,.42),transparent 40%) !important; }
   .memory-overlay { background:linear-gradient(to top,rgba(0,0,0,.78),transparent) !important; }
   [data-theme="light"] .memory-overlay { background:linear-gradient(to top,rgba(30,40,52,.66),transparent) !important; }
@@ -865,6 +865,147 @@
     @media(max-width:600px) { .dino-panel { padding:12px; border-radius:18px; } .dino-hint { flex-basis:100%; } }
   </style>
 
+
+  <style id="drive-access-style">
+    .drive-panel {
+      max-width: 820px; margin: 30px auto; padding: clamp(22px, 5vw, 42px);
+      display: flex; align-items: center; gap: 28px;
+      border: 1px solid var(--glass-edge); border-radius: 26px;
+      background: var(--glass-bg);
+      box-shadow: inset 0 1px 0 var(--glass-highlight), 0 18px 48px rgba(0,0,0,.14);
+      backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    }
+    .drive-icon-wrap {
+      width: 104px; height: 104px; flex: 0 0 104px; display: grid; place-items: center;
+      border-radius: 28px; color: var(--accent); font-size: 3.4rem;
+      border: 1px solid var(--glass-edge);
+      background: linear-gradient(145deg, rgba(var(--accent-rgb),.22), rgba(255,255,255,.035));
+      box-shadow: inset 0 1px 0 var(--glass-highlight), 0 12px 30px rgba(0,0,0,.12);
+    }
+    .drive-copy { min-width: 0; }
+    .drive-eyebrow { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .18em; }
+    .drive-copy h3 { margin: 8px 0 10px; color: var(--text); font-size: clamp(1.5rem, 4vw, 2rem); }
+    .drive-copy h3 span { color: var(--accent); }
+    .drive-copy p { color: var(--text-muted); line-height: 1.8; margin: 0 0 20px; }
+    .drive-open { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .drive-note { display: block; margin-top: 16px; color: var(--text-muted); font-size: .78rem; }
+    .drive-note i { color: var(--accent); margin-right: 6px; }
+    @media(max-width:620px) {
+      .drive-panel { flex-direction: column; align-items: flex-start; gap: 18px; }
+      .drive-icon-wrap { width: 78px; height: 78px; flex-basis: 78px; border-radius: 22px; font-size: 2.6rem; }
+      .drive-open { width: 100%; justify-content: center; }
+    }
+  </style>
+
+
+  <style id="camera-feature-style">
+    .camera-panel{max-width:900px;margin:28px auto;padding:clamp(14px,3vw,26px);border:1px solid var(--glass-edge);border-radius:26px;background:var(--glass-bg);backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 var(--glass-highlight),0 18px 48px rgba(0,0,0,.18)}
+    .camera-stage{position:relative;overflow:hidden;display:grid;place-items:center;min-height:240px;aspect-ratio:4/3;border-radius:19px;border:1px solid var(--glass-edge);background:linear-gradient(135deg,#1c3448,#111923 55%,#52677a);background-size:cover;background-position:center}
+    .camera-stage video{display:block;width:100%;height:100%;max-height: min(66vh,560px);object-fit:cover;position:absolute;inset:0}
+    .camera-stage video.mirrored{transform:scaleX(-1)}
+    .camera-placeholder{z-index:1;text-align:center;padding:24px;color:#e8f4ff;text-shadow:0 2px 12px #000}
+    .camera-placeholder i{font-size:2.6rem;margin-bottom:12px;display:block}
+    .camera-live{position:absolute;z-index:2;top:14px;left:14px;padding:6px 10px;border-radius:30px;background:rgba(0,0,0,.48);color:#fff;font-size:.72rem;letter-spacing:.1em}
+    .camera-controls,.camera-options{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+    .camera-controls .btn{flex:1 1 145px;justify-content:center}
+    .camera-options{padding:15px;border-radius:16px;background:rgba(120,150,180,.07);border:1px solid var(--glass-edge)}
+    .camera-options label{font-size:.83rem;color:var(--text-muted);display:flex;align-items:center;gap:8px}
+    .camera-options select,.camera-options input[type=file]{max-width:100%;padding:9px;border-radius:10px;border:1px solid var(--glass-edge);background:var(--bg-secondary);color:var(--text)}
+    .camera-status{margin:13px 2px 0;color:var(--text-muted);font-size:.85rem}
+    .camera-result{margin-top:20px;display:none}
+    .camera-result.show{display:block}
+    .camera-result img{width:100%;max-height:520px;object-fit:contain;border-radius:16px;border:1px solid var(--glass-edge);background:#080b10}
+    .camera-result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .camera-result-actions .btn{flex:1;justify-content:center}
+    .camera-tip{color:var(--text-muted);font-size:.78rem;line-height:1.7;margin-top:14px}
+    @media(max-width:600px){.camera-stage{aspect-ratio:3/4;min-height:300px}.camera-controls .btn{flex-basis:100%}.camera-options{align-items:flex-start;flex-direction:column}}
+  
+  /* SlavvTech productivity modules */
+  :root { --accent-user: #8bcaff; --glass-user: 38%; }
+  .feature-panel,.monitor-card { border:1px solid var(--border-color,rgba(255,255,255,.15)); background:rgba(255,255,255,.055); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border-radius:22px; padding:22px; box-shadow:0 14px 45px rgba(0,0,0,.12); }
+  .feature-heading,.assistant-head { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+  .feature-heading>i,.assistant-avatar { width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:rgba(139,202,255,.14);color:var(--accent-user);font-size:1.3rem; }
+  .feature-heading h3,.music-main h3,.assistant-head h3 { margin:0 0 5px; }
+  .feature-heading p,.music-main p { margin:0;color:var(--text-muted); }
+  .feature-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0; }
+  .field-label { display:flex;flex-direction:column;gap:9px;color:var(--text-muted);font-size:.88rem; }
+  .field-label input,.field-label select,.notes-toolbar input,.note-editor input,.note-editor textarea,.assistant-form input,.weather-search input { width:100%;min-width:0;padding:12px 14px;border-radius:13px;border:1px solid rgba(150,190,225,.22);background:rgba(20,35,55,.25);color:inherit;outline:none; }
+  .field-label input[type=color] { height:48px;padding:5px; }
+  .field-label input[type=range],.music-progress input,.volume-control input { accent-color:var(--accent-user); }
+  .feature-actions { display:flex;gap:10px;flex-wrap:wrap;margin-top:18px; }
+  .feature-eyebrow { color:var(--accent-user);font-size:.68rem;font-weight:800;letter-spacing:2px; }
+  .muted-text,.feature-note { color:var(--text-muted);font-size:.82rem;line-height:1.6; }
+  .music-layout { display:grid;grid-template-columns:190px minmax(0,1fr);gap:25px;align-items:center; }
+  .music-art { width:180px;height:180px;border-radius:28px;display:grid;place-items:center;background:radial-gradient(circle,rgba(139,202,255,.28),rgba(139,202,255,.04));font-size:5rem;color:var(--accent-user); }
+  .music-art.playing i { animation:disc-spin 5s linear infinite; }
+  @keyframes disc-spin { to { transform:rotate(360deg); } }
+  .music-progress { display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:.75rem;color:var(--text-muted); }
+  .music-progress input { flex:1;min-width:0; }
+  .music-controls { display:flex;align-items:center;gap:12px; }
+  .icon-btn { width:42px;height:42px;border:1px solid rgba(150,190,225,.22);border-radius:50%;background:rgba(255,255,255,.07);color:inherit;cursor:pointer; }
+  .icon-btn.play-btn { width:52px;height:52px;background:var(--accent-user);color:#142334; }
+  .volume-control { display:flex;align-items:center;gap:8px;margin-left:auto;max-width:145px; }
+  .music-playlist { display:grid;gap:7px;margin-top:16px;max-height:180px;overflow:auto; }
+  .playlist-track,.note-item,.event-item { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.055);border:1px solid transparent; }
+  .playlist-track { cursor:pointer;text-align:left;color:inherit; }
+  .playlist-track.active,.note-item.active { border-color:var(--accent-user);background:rgba(139,202,255,.11); }
+  .notes-toolbar { display:flex;gap:10px; }
+  .notes-layout { display:grid;grid-template-columns:minmax(180px,.75fr) minmax(0,1.5fr);gap:16px;margin-top:18px; }
+  .notes-list { display:grid;align-content:start;gap:8px;max-height:420px;overflow:auto; }
+  .note-item { cursor:pointer;display:block;text-align:left;color:inherit;width:100%; }
+  .note-item strong,.note-item small { display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .note-item small { color:var(--text-muted);margin-top:4px; }
+  .note-editor { display:grid;gap:12px;align-content:start; }
+  .note-editor textarea { resize:vertical;min-height:190px; }
+  .monitor-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px; }
+  .monitor-card { display:flex;flex-direction:column;gap:9px;min-width:0; }
+  .monitor-card i { color:var(--accent-user);font-size:1.2rem; }
+  .monitor-card span { color:var(--text-muted);font-size:.8rem; }
+  .monitor-card strong { font-size:1rem;overflow-wrap:anywhere; }
+  .monitor-card.wide { grid-column:1/-1; }
+  .event-list { display:grid;gap:9px;margin-top:18px; }
+  .event-item small { display:block;color:var(--text-muted);margin-top:4px; }
+  .event-item button { border:0;background:transparent;color:#ff8d9a;cursor:pointer;padding:8px; }
+  .assistant-panel { max-width:850px; }
+  .assistant-online { color:#75d6a0;font-size:.75rem; }
+  .assistant-chat { height:310px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:16px;background:rgba(0,0,0,.10); }
+  .chat-bubble { max-width:85%;padding:12px 15px;border-radius:15px;line-height:1.5;font-size:.9rem;white-space:pre-wrap; }
+  .chat-bubble.bot { align-self:flex-start;background:rgba(139,202,255,.13); }
+  .chat-bubble.user { align-self:flex-end;background:rgba(139,202,255,.24); }
+  .assistant-form,.weather-search { display:flex;gap:9px;margin-top:13px; }
+  .assistant-form button { flex:none; }
+  .weather-search input { flex:1; }
+  .weather-result { text-align:center;padding:25px 12px 18px; }
+  .weather-result>i { font-size:3rem;color:var(--accent-user); }
+  .weather-result h3 { font-size:2rem;margin:12px 0 5px; }
+  .weather-result p { color:var(--text-muted); }
+  .weather-forecast { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px; }
+  .forecast-day { text-align:center;padding:13px 8px;border-radius:14px;background:rgba(255,255,255,.06); }
+  .forecast-day strong,.forecast-day span { display:block;margin:5px 0; }
+  .forecast-day span { color:var(--text-muted);font-size:.78rem; }
+  [data-theme="light"] .field-label input,[data-theme="light"] .field-label select,[data-theme="light"] .notes-toolbar input,[data-theme="light"] .note-editor input,[data-theme="light"] .note-editor textarea,[data-theme="light"] .assistant-form input,[data-theme="light"] .weather-search input { background:rgba(255,255,255,.65);color:#243447; }
+  @media(max-width:700px) {
+    .feature-grid,.notes-layout { grid-template-columns:1fr; }
+    .music-layout { grid-template-columns:1fr; }
+    .music-art { width:130px;height:130px;font-size:3.6rem;margin:auto; }
+    .monitor-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .weather-forecast { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .weather-search { flex-wrap:wrap; }
+    .weather-search input { flex-basis:100%; }
+    .notes-toolbar { flex-direction:column; }
+  }
+
+  .assistant-connect { display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-bottom:14px; }
+  .assistant-connect .field-label { min-width:0; }
+  .assistant-form textarea { flex:1;min-width:0;resize:vertical;max-height:150px;padding:12px 14px;border-radius:13px;border:1px solid rgba(150,190,225,.22);background:rgba(20,35,55,.25);color:inherit;outline:none;font:inherit; }
+  .assistant-bottom { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px; }
+  .assistant-bottom .feature-note { margin:0; }
+  .assistant-form button { align-self:stretch;min-width:48px; }
+  .assistant-chat .chat-bubble { overflow-wrap:anywhere; }
+  .assistant-chat .chat-bubble.pending { opacity:.7;font-style:italic; }
+  @media(max-width:600px) { .assistant-connect { grid-template-columns:1fr; } .assistant-bottom { align-items:flex-start;flex-direction:column; } }
+</style>
+
 </head>
 <body>
   <div class="bg-effects">
@@ -901,6 +1042,12 @@
       <a href="#memori" class="side-link" data-section="memori"><span class="side-icon"><i class="fas fa-images"></i></span><span>Pictures</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#sosial" class="side-link" data-section="sosial"><span class="side-icon"><i class="fas fa-share-nodes"></i></span><span>Social Media</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#game" class="side-link" data-section="game"><span class="side-icon"><i class="fas fa-gamepad"></i></span><span>Dino Game</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#drive" class="side-link" data-section="drive"><span class="side-icon"><i class="fab fa-google-drive"></i></span><span>Akses Drive</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#kamera" class="side-link" data-section="kamera"><span class="side-icon"><i class="fas fa-camera"></i></span><span>Camera Studio</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#customizer" class="side-link" data-section="customizer"><span class="side-icon"><i class="fas fa-palette"></i></span><span>Theme Customizer</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#music" class="side-link" data-section="music"><span class="side-icon"><i class="fas fa-music"></i></span><span>Music Player</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#notes" class="side-link" data-section="notes"><span class="side-icon"><i class="fas fa-note-sticky"></i></span><span>Smart Notes</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <a href="#weather" class="side-link" data-section="weather"><span class="side-icon"><i class="fas fa-cloud-sun"></i></span><span>Live Weather</span><i class="fas fa-arrow-right side-arrow"></i></a>
     </nav>
     <div class="sidebar-bottom"><span class="status-dot"></span><span>SLAVVTECH INTERFACE</span></div>
   </aside>
@@ -1030,6 +1177,151 @@
         <span class="dino-hint">Tekan SPACE / ↑ atau ketuk area game untuk melompat</span>
       </div>
       <p class="dino-status" id="dino-status" aria-live="polite">Siap bermain? Tekan “Mulai Game”.</p>
+    </div>
+  </section>
+
+
+  <!-- GOOGLE DRIVE ACCESS -->
+  <section id="drive" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Akses <span>Dokumen</span></h2>
+    <p class="section-sub fade-up">Satu tempat untuk membuka kumpulan dokumen SlavvTech melalui Google Drive.</p>
+    <div class="drive-panel glass-panel fade-up">
+      <div class="drive-icon-wrap"><i class="fab fa-google-drive"></i></div>
+      <div class="drive-copy">
+        <span class="drive-eyebrow">CLOUD DOCUMENTS</span>
+        <h3>Google <span>Drive</span></h3>
+        <p>Buka folder dokumen yang sudah ditautkan. Kamu bisa melihat atau mengunduh file sesuai izin akses yang diberikan oleh pemilik folder.</p>
+        <a class="btn btn-primary drive-open" href="https://drive.google.com/drive/folders/10VTzxc80oRrzlVACrI4zvqkA1stgujBq" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-arrow-up-right-from-square"></i> Buka Dokumen di Drive
+        </a>
+        <span class="drive-note"><i class="fas fa-lock"></i> Jika diminta, masuk ke akun Google yang memiliki izin akses.</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CAMERA STUDIO -->
+  <section id="kamera" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Camera <span>Studio</span></h2>
+    <p class="section-sub fade-up">Gunakan kamera perangkat, atur tampilan, lalu ambil dan simpan foto langsung dari browser.</p>
+    <div class="camera-panel fade-up">
+      <div class="camera-stage" id="camera-stage">
+        <video id="camera-video" autoplay playsinline muted></video>
+        <div class="camera-placeholder" id="camera-placeholder">
+          <i class="fas fa-camera"></i>
+          <strong>Kamera belum aktif</strong>
+          <p>Tekan “Aktifkan Kamera” dan izinkan akses kamera.</p>
+        </div>
+        <span class="camera-live" id="camera-live" hidden><i class="fas fa-circle" style="color:#ff6868"></i> LIVE PREVIEW</span>
+      </div>
+
+      <div class="camera-controls">
+        <button class="btn btn-primary" id="camera-start"><i class="fas fa-video"></i> Aktifkan Kamera</button>
+        <button class="btn btn-outline" id="camera-switch" disabled><i class="fas fa-camera-rotate"></i> Ganti Kamera</button>
+        <button class="btn btn-outline" id="camera-capture" disabled><i class="fas fa-camera"></i> Potret</button>
+        <button class="btn btn-outline" id="camera-stop" disabled><i class="fas fa-stop"></i> Matikan</button>
+      </div>
+
+      <div class="camera-options">
+        <label>Filter
+          <select id="camera-filter">
+            <option value="none">Normal</option>
+            <option value="grayscale(1)">Hitam Putih</option>
+            <option value="sepia(.55)">Vintage</option>
+            <option value="saturate(1.5) contrast(1.08)">Vivid</option>
+            <option value="brightness(1.12) contrast(1.08)">Cerah</option>
+            <option value="contrast(1.18) saturate(.8)">Cinematic</option>
+          </select>
+        </label>
+        <label>Background studio
+          <select id="camera-background">
+            <option value="linear-gradient(135deg,#1c3448,#111923 55%,#52677a)">Midnight Blue</option>
+            <option value="linear-gradient(135deg,#25213b,#51436d,#171827)">Purple Haze</option>
+            <option value="linear-gradient(135deg,#16443e,#182b35,#4d7468)">Emerald</option>
+            <option value="linear-gradient(135deg,#684b35,#25202a,#9a7960)">Warm Studio</option>
+            <option value="linear-gradient(135deg,#e7edf3,#9eafc1,#d4dce5)">Soft Silver</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="camera-mirror" checked> Mirror selfie</label>
+        <label>Foto latar studio <input type="file" id="camera-bg-upload" accept="image/*"></label>
+      </div>
+      <p class="camera-status" id="camera-status" aria-live="polite">Kamera belum dijalankan. Akses hanya diminta setelah kamu menekan tombol aktifkan.</p>
+
+      <div class="camera-result" id="camera-result">
+        <h3 style="margin:8px 0 12px">Hasil Potret</h3>
+        <img id="camera-photo" alt="Hasil foto kamera">
+        <div class="camera-result-actions">
+          <a class="btn btn-primary" id="camera-download" download="slavvtech-photo.png"><i class="fas fa-download"></i> Simpan Foto</a>
+          <button class="btn btn-outline" id="camera-retake"><i class="fas fa-rotate"></i> Foto Ulang</button>
+        </div>
+      </div>
+      <p class="camera-tip"><i class="fas fa-circle-info"></i> Background studio mengubah tampilan area/bingkai kamera, bukan menghapus latar asli di belakang orang. Penggantian latar otomatis membutuhkan pemrosesan segmentasi tambahan. Kamera memerlukan izin browser dan biasanya harus dibuka melalui HTTPS atau localhost. Foto diproses di perangkat dan tidak otomatis diunggah.</p>
+    </div>
+  </section>
+
+
+
+  <!-- THEME CUSTOMIZER -->
+  <section id="customizer" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Theme <span>Customizer</span></h2>
+    <p class="section-sub fade-up">Atur warna aksen, tampilan, dan wallpaper SlavvTech sesuai selera.</p>
+    <div class="feature-panel glass-panel fade-up">
+      <div class="feature-heading"><i class="fas fa-palette"></i><div><h3>Appearance Studio</h3><p>Pengaturan disimpan otomatis di browser ini.</p></div></div>
+      <div class="feature-grid">
+        <label class="field-label">Warna aksen <input type="color" id="accent-color" value="#8bcaff"></label>
+        <label class="field-label">Mode tampilan <select id="appearance-mode"><option value="dark">Dark Glass</option><option value="light">Light Glass</option></select></label>
+        <label class="field-label">Wallpaper latar <input type="file" id="wallpaper-upload" accept="image/*"></label>
+        <label class="field-label">Intensitas kaca <input type="range" id="glass-opacity" min="10" max="85" value="38"></label>
+      </div>
+      <div class="feature-actions"><button class="btn btn-outline" id="reset-theme"><i class="fas fa-rotate-left"></i> Reset Tampilan</button></div>
+    </div>
+  </section>
+
+  <!-- MUSIC PLAYER -->
+  <section id="music" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Music <span>Player</span></h2>
+    <p class="section-sub fade-up">Putar musik dari file audio yang kamu pilih di perangkat.</p>
+    <div class="feature-panel glass-panel fade-up music-layout">
+      <div class="music-art"><i class="fas fa-compact-disc" id="music-disc"></i></div>
+      <div class="music-main">
+        <span class="feature-eyebrow">LOCAL MUSIC PLAYER</span><h3 id="music-title">Belum ada lagu</h3><p id="music-filename">Pilih file audio untuk memulai.</p>
+        <input type="file" id="music-files" accept="audio/*" multiple>
+        <audio id="music-audio" preload="metadata"></audio>
+        <div class="music-progress"><span id="music-current">0:00</span><input type="range" id="music-seek" min="0" max="100" value="0"><span id="music-duration">0:00</span></div>
+        <div class="music-controls">
+          <button class="icon-btn" id="music-prev" aria-label="Lagu sebelumnya"><i class="fas fa-backward-step"></i></button>
+          <button class="icon-btn play-btn" id="music-play" aria-label="Putar"><i class="fas fa-play"></i></button>
+          <button class="icon-btn" id="music-next" aria-label="Lagu berikutnya"><i class="fas fa-forward-step"></i></button>
+          <label class="volume-control"><i class="fas fa-volume-high"></i><input type="range" id="music-volume" min="0" max="1" step=".01" value=".8"></label>
+        </div>
+        <div id="music-playlist" class="music-playlist"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMART NOTES -->
+  <section id="notes" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Smart <span>Notes</span></h2>
+    <p class="section-sub fade-up">Catat ide, simpan, cari, dan kelola catatan secara lokal.</p>
+    <div class="feature-panel glass-panel fade-up">
+      <div class="notes-toolbar"><input id="note-search" placeholder="Cari catatan..." aria-label="Cari catatan"><button class="btn btn-primary" id="note-new"><i class="fas fa-plus"></i> Catatan Baru</button></div>
+      <div class="notes-layout"><div id="notes-list" class="notes-list"></div><div class="note-editor">
+        <input id="note-title" placeholder="Judul catatan"><textarea id="note-body" rows="9" placeholder="Tulis ide atau catatanmu di sini..."></textarea>
+        <div class="feature-actions"><button class="btn btn-primary" id="note-save"><i class="fas fa-floppy-disk"></i> Simpan</button><button class="btn btn-outline" id="note-delete"><i class="fas fa-trash"></i> Hapus</button></div>
+        <small id="note-status" class="muted-text">Catatan tersimpan di browser perangkat ini.</small>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- LIVE WEATHER -->
+  <section id="weather" class="page-section" aria-hidden="true">
+    <h2 class="section-title fade-up">Live <span>Weather</span></h2>
+    <p class="section-sub fade-up">Lihat kondisi cuaca terkini dan perkiraan singkat berdasarkan kota pilihanmu.</p>
+    <div class="feature-panel glass-panel fade-up weather-panel">
+      <div class="weather-search"><input id="weather-city" value="Bogor" placeholder="Masukkan nama kota"><button class="btn btn-primary" id="weather-search"><i class="fas fa-magnifying-glass"></i> Cari</button><button class="btn btn-outline" id="weather-location"><i class="fas fa-location-crosshairs"></i> Lokasi saya</button></div>
+      <div id="weather-result" class="weather-result"><i class="fas fa-cloud-sun"></i><h3>Cuaca SlavvTech</h3><p>Tekan Cari untuk memuat data cuaca.</p></div>
+      <div id="weather-forecast" class="weather-forecast"></div>
+      <small class="muted-text">Data cuaca menggunakan Open-Meteo. Lokasi hanya digunakan saat kamu memilih pencarian atau memberikan izin lokasi.</small>
     </div>
   </section>
 
@@ -1266,6 +1558,259 @@
         }
       });
       draw();
+    })();
+
+
+
+    // Camera Studio: capture locally with device camera permission.
+    (() => {
+      const video = document.getElementById('camera-video');
+      if (!video) return;
+      const stage = document.getElementById('camera-stage');
+      const placeholder = document.getElementById('camera-placeholder');
+      const live = document.getElementById('camera-live');
+      const startBtn = document.getElementById('camera-start');
+      const switchBtn = document.getElementById('camera-switch');
+      const captureBtn = document.getElementById('camera-capture');
+      const stopBtn = document.getElementById('camera-stop');
+      const filterSelect = document.getElementById('camera-filter');
+      const backgroundSelect = document.getElementById('camera-background');
+      const mirrorToggle = document.getElementById('camera-mirror');
+      const backgroundUpload = document.getElementById('camera-bg-upload');
+      const status = document.getElementById('camera-status');
+      const result = document.getElementById('camera-result');
+      const photo = document.getElementById('camera-photo');
+      const download = document.getElementById('camera-download');
+      let stream = null;
+      let facingMode = 'user';
+      let customBackgroundUrl = null;
+
+      function updatePreview() {
+        video.style.filter = filterSelect.value === 'none' ? 'none' : filterSelect.value;
+        video.classList.toggle('mirrored', mirrorToggle.checked && facingMode === 'user');
+      }
+      function setRunning(isRunning) {
+        placeholder.hidden = isRunning;
+        live.hidden = !isRunning;
+        captureBtn.disabled = !isRunning;
+        stopBtn.disabled = !isRunning;
+        switchBtn.disabled = !isRunning;
+        startBtn.disabled = isRunning;
+      }
+      async function startCamera() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          status.textContent = 'Browser tidak mendukung akses kamera atau halaman belum menggunakan HTTPS.';
+          return;
+        }
+        stopCamera();
+        status.textContent = 'Meminta izin kamera...';
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            audio: false,
+            video: { facingMode: { ideal: facingMode }, width: { ideal: 1920 }, height: { ideal: 1080 } }
+          });
+          video.srcObject = stream;
+          await video.play();
+          setRunning(true);
+          updatePreview();
+          status.textContent = 'Kamera aktif. Atur filter dan tekan Potret untuk mengambil foto.';
+        } catch (error) {
+          setRunning(false);
+          const messages = {
+            NotAllowedError: 'Izin kamera ditolak. Izinkan kamera melalui pengaturan situs/browser.',
+            NotFoundError: 'Kamera tidak ditemukan pada perangkat ini.',
+            NotReadableError: 'Kamera sedang digunakan aplikasi lain.'
+          };
+          status.textContent = messages[error.name] || 'Kamera gagal dibuka. Periksa izin dan koneksi kamera perangkat.';
+        }
+      }
+      function stopCamera() {
+        if (stream) stream.getTracks().forEach(track => track.stop());
+        stream = null;
+        video.srcObject = null;
+        setRunning(false);
+        live.hidden = true;
+        placeholder.hidden = false;
+      }
+      function takePhoto() {
+        if (!stream || !video.videoWidth) return;
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.filter = filterSelect.value === 'none' ? 'none' : filterSelect.value;
+        const mirror = mirrorToggle.checked && facingMode === 'user';
+        if (mirror) {
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+        }
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/png');
+        photo.src = dataUrl;
+        download.href = dataUrl;
+        result.classList.add('show');
+        status.textContent = 'Foto berhasil diambil. Kamu bisa menyimpannya ke perangkat.';
+      }
+      startBtn.addEventListener('click', startCamera);
+      stopBtn.addEventListener('click', () => {
+        stopCamera();
+        status.textContent = 'Kamera telah dimatikan.';
+      });
+      switchBtn.addEventListener('click', async () => {
+        facingMode = facingMode === 'user' ? 'environment' : 'user';
+        await startCamera();
+      });
+      captureBtn.addEventListener('click', takePhoto);
+      document.getElementById('camera-retake').addEventListener('click', () => {
+        result.classList.remove('show');
+        status.textContent = 'Silakan ambil foto lagi.';
+      });
+      filterSelect.addEventListener('change', updatePreview);
+      mirrorToggle.addEventListener('change', updatePreview);
+      backgroundSelect.addEventListener('change', () => {
+        stage.style.backgroundImage = backgroundSelect.value;
+        if (customBackgroundUrl) {
+          URL.revokeObjectURL(customBackgroundUrl);
+          customBackgroundUrl = null;
+        }
+      });
+      backgroundUpload.addEventListener('change', () => {
+        const file = backgroundUpload.files && backgroundUpload.files[0];
+        if (!file) return;
+        if (customBackgroundUrl) URL.revokeObjectURL(customBackgroundUrl);
+        customBackgroundUrl = URL.createObjectURL(file);
+        stage.style.backgroundImage = `url("${customBackgroundUrl}")`;
+        status.textContent = 'Foto latar studio dipasang pada area bingkai kamera.';
+      });
+      window.addEventListener('pagehide', stopCamera);
+    })();
+
+
+
+    // Theme Customizer: persisted locally.
+    (() => {
+      const root = document.documentElement;
+      const accent = document.getElementById('accent-color');
+      const mode = document.getElementById('appearance-mode');
+      const opacity = document.getElementById('glass-opacity');
+      const wallpaper = document.getElementById('wallpaper-upload');
+      const saved = (() => { try { return JSON.parse(localStorage.getItem('slavvTheme') || '{}'); } catch (_) { return {}; } })();
+      function applyTheme() {
+        root.style.setProperty('--accent-user', accent.value);
+        root.style.setProperty('--primary', accent.value);
+        root.style.setProperty('--glass-user', opacity.value + '%');
+        root.dataset.theme = mode.value;
+        try { localStorage.setItem('slavvTheme', JSON.stringify({ accent: accent.value, mode: mode.value, opacity: opacity.value })); } catch (_) {}
+      }
+      if (saved.accent) accent.value = saved.accent;
+      if (saved.mode) mode.value = saved.mode;
+      if (saved.opacity) opacity.value = saved.opacity;
+      applyTheme();
+      [accent, mode, opacity].forEach(el => el.addEventListener('input', applyTheme));
+      wallpaper.addEventListener('change', () => {
+        const file = wallpaper.files && wallpaper.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = () => { document.body.style.backgroundImage = `linear-gradient(rgba(10,18,30,.25),rgba(10,18,30,.35)),url("${reader.result}")`; document.body.style.backgroundSize = 'cover'; document.body.style.backgroundAttachment = 'fixed'; try { localStorage.setItem('slavvWallpaper', reader.result); } catch (_) {} };
+        reader.readAsDataURL(file);
+      });
+      try { const bg = localStorage.getItem('slavvWallpaper'); if (bg) { document.body.style.backgroundImage = `linear-gradient(rgba(10,18,30,.25),rgba(10,18,30,.35)),url("${bg}")`; document.body.style.backgroundSize = 'cover'; document.body.style.backgroundAttachment = 'fixed'; } } catch (_) {}
+      document.getElementById('reset-theme').addEventListener('click', () => {
+        accent.value = '#8bcaff'; mode.value = 'dark'; opacity.value = '38'; document.body.style.backgroundImage = '';
+        try { localStorage.removeItem('slavvTheme'); localStorage.removeItem('slavvWallpaper'); } catch (_) {}
+        applyTheme();
+      });
+    })();
+
+    // Music Player: audio files stay on the device; no upload to a server.
+    (() => {
+      const picker = document.getElementById('music-files'), audio = document.getElementById('music-audio');
+      const title = document.getElementById('music-title'), filename = document.getElementById('music-filename');
+      const list = document.getElementById('music-playlist'), play = document.getElementById('music-play');
+      const seek = document.getElementById('music-seek'), current = document.getElementById('music-current'), duration = document.getElementById('music-duration');
+      const disc = document.getElementById('music-disc');
+      let tracks = [], index = 0, objectUrl = null;
+      const fmt = s => { if (!Number.isFinite(s)) return '0:00'; return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'); };
+      function loadTrack(i, autoplay=false) {
+        if (!tracks.length) return;
+        index = (i + tracks.length) % tracks.length;
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
+        objectUrl = URL.createObjectURL(tracks[index]);
+        audio.src = objectUrl; title.textContent = tracks[index].name.replace(/\.[^.]+$/, '');
+        filename.textContent = tracks[index].name; renderList();
+        if (autoplay) audio.play().catch(() => {});
+      }
+      function renderList() {
+        list.innerHTML = '';
+        tracks.forEach((file,i) => { const b = document.createElement('button'); b.className = 'playlist-track' + (i===index?' active':''); b.textContent = (i+1)+'. '+file.name; b.addEventListener('click',()=>loadTrack(i,true)); list.appendChild(b); });
+      }
+      picker.addEventListener('change', () => { tracks = Array.from(picker.files || []).filter(f => f.type.startsWith('audio/')); if (tracks.length) loadTrack(0); });
+      play.addEventListener('click', () => { if (!audio.src) { picker.click(); return; } if (audio.paused) audio.play().catch(()=>{}); else audio.pause(); });
+      audio.addEventListener('play',()=>{play.innerHTML='<i class="fas fa-pause"></i>';disc.parentElement.classList.add('playing');});
+      audio.addEventListener('pause',()=>{play.innerHTML='<i class="fas fa-play"></i>';disc.parentElement.classList.remove('playing');});
+      audio.addEventListener('timeupdate',()=>{seek.value=audio.duration?audio.currentTime/audio.duration*100:0;current.textContent=fmt(audio.currentTime);});
+      audio.addEventListener('loadedmetadata',()=>duration.textContent=fmt(audio.duration));
+      audio.addEventListener('ended',()=>loadTrack(index+1,true));
+      seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=Number(seek.value)/100*audio.duration;});
+      document.getElementById('music-prev').addEventListener('click',()=>loadTrack(index-1,true));
+      document.getElementById('music-next').addEventListener('click',()=>loadTrack(index+1,true));
+      document.getElementById('music-volume').addEventListener('input',e=>audio.volume=Number(e.target.value));
+      audio.volume=.8;
+      window.addEventListener('pagehide',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
+    })();
+
+    // Smart Notes: localStorage only.
+    (() => {
+      const key='slavvNotes', list=document.getElementById('notes-list'), title=document.getElementById('note-title'), body=document.getElementById('note-body');
+      const status=document.getElementById('note-status'), search=document.getElementById('note-search');
+      let notes=[], selected=null;
+      try { notes=JSON.parse(localStorage.getItem(key)||'[]'); if(!Array.isArray(notes))notes=[]; } catch(_){}
+      function persist(){try{localStorage.setItem(key,JSON.stringify(notes));status.textContent='Tersimpan otomatis di browser.';}catch(_){status.textContent='Penyimpanan browser penuh atau tidak tersedia.';}}
+      function render(){
+        list.innerHTML=''; const q=search.value.toLowerCase();
+        notes.filter(n=>(n.title+' '+n.body).toLowerCase().includes(q)).forEach(n=>{
+          const b=document.createElement('button');b.className='note-item'+(n.id===selected?' active':'');
+          const strong=document.createElement('strong');strong.textContent=n.title||'Tanpa judul';
+          const small=document.createElement('small');small.textContent=new Date(n.updated).toLocaleString();
+          b.append(strong,small);b.addEventListener('click',()=>open(n.id));list.appendChild(b);
+        });
+        if(!list.children.length){const p=document.createElement('p');p.className='muted-text';p.textContent='Belum ada catatan.';list.appendChild(p);}
+      }
+      function open(id){selected=id;const n=notes.find(x=>x.id===id);if(n){title.value=n.title;body.value=n.body;}render();}
+      document.getElementById('note-new').addEventListener('click',()=>{selected=null;title.value='';body.value='';render();title.focus();});
+      document.getElementById('note-save').addEventListener('click',()=>{
+        const now=Date.now();let n=notes.find(x=>x.id===selected);
+        if(!n){n={id:String(now),title:'',body:'',updated:now};notes.unshift(n);selected=n.id;}
+        n.title=title.value.trim()||'Tanpa judul';n.body=body.value;n.updated=now;persist();render();
+      });
+      document.getElementById('note-delete').addEventListener('click',()=>{if(!selected)return;notes=notes.filter(n=>n.id!==selected);selected=null;title.value='';body.value='';persist();render();});
+      search.addEventListener('input',render);render();
+    })();
+
+    // Live Weather from Open-Meteo (no API key required).
+    (() => {
+      const cityInput=document.getElementById('weather-city'), result=document.getElementById('weather-result'), forecast=document.getElementById('weather-forecast');
+      const searchBtn=document.getElementById('weather-search'), locationBtn=document.getElementById('weather-location');
+      const codes={0:'Cerah',1:'Cerah berawan',2:'Berawan sebagian',3:'Mendung',45:'Berkabut',48:'Kabut tebal',51:'Gerimis ringan',53:'Gerimis',55:'Gerimis lebat',61:'Hujan ringan',63:'Hujan',65:'Hujan lebat',71:'Salju ringan',73:'Salju',75:'Salju lebat',80:'Hujan lokal',81:'Hujan sedang',82:'Hujan lebat',95:'Badai petir'};
+      async function loadWeather(lat,lon,label){
+        result.innerHTML='<i class="fas fa-spinner fa-spin"></i><p>Memuat data cuaca...</p>';forecast.innerHTML='';
+        try{
+          const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5`;
+          const r=await fetch(url);if(!r.ok)throw new Error('weather');const d=await r.json();const c=d.current;
+          result.innerHTML=`<i class="fas fa-cloud-sun"></i><h3>${Math.round(c.temperature_2m)}°C</h3><p>${codes[c.weather_code]||'Kondisi cuaca'} · ${label}</p><p>Terasa ${Math.round(c.apparent_temperature)}°C · Kelembapan ${c.relative_humidity_2m}% · Angin ${c.wind_speed_10m} km/jam</p>`;
+          d.daily.time.forEach((day,i)=>{const el=document.createElement('div');el.className='forecast-day';const date=new Date(day+'T12:00:00');const name=date.toLocaleDateString('id-ID',{weekday:'short'});el.innerHTML=`<strong>${name}</strong><span>${codes[d.daily.weather_code[i]]||'Cuaca'}</span><strong>${Math.round(d.daily.temperature_2m_max[i])}° / ${Math.round(d.daily.temperature_2m_min[i])}°</strong>`;forecast.appendChild(el);});
+        }catch(_){result.innerHTML='<i class="fas fa-cloud-exclamation"></i><h3>Cuaca tidak tersedia</h3><p>Periksa koneksi internet lalu coba lagi.</p>';}
+      }
+      async function searchCity(){
+        const city=cityInput.value.trim();if(!city)return;
+        result.innerHTML='<i class="fas fa-spinner fa-spin"></i><p>Mencari kota...</p>';
+        try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(city)+'&count=1&language=id&format=json');const d=await r.json();if(!d.results||!d.results.length)throw new Error('not-found');const p=d.results[0];loadWeather(p.latitude,p.longitude,[p.name,p.admin1,p.country].filter(Boolean).join(', '));}
+        catch(_){result.innerHTML='<i class="fas fa-circle-exclamation"></i><h3>Kota tidak ditemukan</h3><p>Coba nama kota lain.</p>';}
+      }
+      searchBtn.addEventListener('click',searchCity);cityInput.addEventListener('keydown',e=>{if(e.key==='Enter')searchCity();});
+      locationBtn.addEventListener('click',()=>{if(!navigator.geolocation){result.textContent='Browser tidak mendukung lokasi.';return;}result.innerHTML='<p>Meminta izin lokasi...</p>';navigator.geolocation.getCurrentPosition(pos=>loadWeather(pos.coords.latitude,pos.coords.longitude,'Lokasi saya'),()=>{result.innerHTML='<p>Izin lokasi tidak tersedia. Kamu tetap bisa mencari kota secara manual.</p>';},{timeout:10000,maximumAge:300000});});
+      searchCity();
     })();
 
     // Reveal visible content.
