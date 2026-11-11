@@ -899,115 +899,7 @@
   </style>
 
 
-  <style id="camera-feature-style">
-    .camera-panel{max-width:900px;margin:28px auto;padding:clamp(14px,3vw,26px);border:1px solid var(--glass-edge);border-radius:26px;background:var(--glass-bg);backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 var(--glass-highlight),0 18px 48px rgba(0,0,0,.18)}
-    .camera-stage{position:relative;overflow:hidden;display:grid;place-items:center;min-height:240px;aspect-ratio:4/3;border-radius:19px;border:1px solid var(--glass-edge);background:linear-gradient(135deg,#1c3448,#111923 55%,#52677a);background-size:cover;background-position:center}
-    .camera-stage video{display:block;width:100%;height:100%;max-height: min(66vh,560px);object-fit:cover;position:absolute;inset:0}
-    .camera-stage video.mirrored{transform:scaleX(-1)}
-    .camera-placeholder{z-index:1;text-align:center;padding:24px;color:#e8f4ff;text-shadow:0 2px 12px #000}
-    .camera-placeholder i{font-size:2.6rem;margin-bottom:12px;display:block}
-    .camera-live{position:absolute;z-index:2;top:14px;left:14px;padding:6px 10px;border-radius:30px;background:rgba(0,0,0,.48);color:#fff;font-size:.72rem;letter-spacing:.1em}
-    .camera-controls,.camera-options{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
-    .camera-controls .btn{flex:1 1 145px;justify-content:center}
-    .camera-options{padding:15px;border-radius:16px;background:rgba(120,150,180,.07);border:1px solid var(--glass-edge)}
-    .camera-options label{font-size:.83rem;color:var(--text-muted);display:flex;align-items:center;gap:8px}
-    .camera-options select,.camera-options input[type=file]{max-width:100%;padding:9px;border-radius:10px;border:1px solid var(--glass-edge);background:var(--bg-secondary);color:var(--text)}
-    .camera-status{margin:13px 2px 0;color:var(--text-muted);font-size:.85rem}
-    .camera-result{margin-top:20px;display:none}
-    .camera-result.show{display:block}
-    .camera-result img{width:100%;max-height:520px;object-fit:contain;border-radius:16px;border:1px solid var(--glass-edge);background:#080b10}
-    .camera-result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .camera-result-actions .btn{flex:1;justify-content:center}
-    .camera-tip{color:var(--text-muted);font-size:.78rem;line-height:1.7;margin-top:14px}
-    @media(max-width:600px){.camera-stage{aspect-ratio:3/4;min-height:300px}.camera-controls .btn{flex-basis:100%}.camera-options{align-items:flex-start;flex-direction:column}}
   
-  /* SlavvTech productivity modules */
-  :root { --accent-user: #8bcaff; --glass-user: 38%; }
-  .feature-panel,.monitor-card { border:1px solid var(--border-color,rgba(255,255,255,.15)); background:rgba(255,255,255,.055); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); border-radius:22px; padding:22px; box-shadow:0 14px 45px rgba(0,0,0,.12); }
-  .feature-heading,.assistant-head { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
-  .feature-heading>i,.assistant-avatar { width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:rgba(139,202,255,.14);color:var(--accent-user);font-size:1.3rem; }
-  .feature-heading h3,.music-main h3,.assistant-head h3 { margin:0 0 5px; }
-  .feature-heading p,.music-main p { margin:0;color:var(--text-muted); }
-  .feature-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0; }
-  .field-label { display:flex;flex-direction:column;gap:9px;color:var(--text-muted);font-size:.88rem; }
-  .field-label input,.field-label select,.notes-toolbar input,.note-editor input,.note-editor textarea,.assistant-form input,.weather-search input { width:100%;min-width:0;padding:12px 14px;border-radius:13px;border:1px solid rgba(150,190,225,.22);background:rgba(20,35,55,.25);color:inherit;outline:none; }
-  .field-label input[type=color] { height:48px;padding:5px; }
-  .field-label input[type=range],.music-progress input,.volume-control input { accent-color:var(--accent-user); }
-  .feature-actions { display:flex;gap:10px;flex-wrap:wrap;margin-top:18px; }
-  .feature-eyebrow { color:var(--accent-user);font-size:.68rem;font-weight:800;letter-spacing:2px; }
-  .muted-text,.feature-note { color:var(--text-muted);font-size:.82rem;line-height:1.6; }
-  .music-layout { display:grid;grid-template-columns:190px minmax(0,1fr);gap:25px;align-items:center; }
-  .music-art { width:180px;height:180px;border-radius:28px;display:grid;place-items:center;background:radial-gradient(circle,rgba(139,202,255,.28),rgba(139,202,255,.04));font-size:5rem;color:var(--accent-user); }
-  .music-art.playing i { animation:disc-spin 5s linear infinite; }
-  @keyframes disc-spin { to { transform:rotate(360deg); } }
-  .music-progress { display:flex;align-items:center;gap:10px;margin:18px 0 8px;font-size:.75rem;color:var(--text-muted); }
-  .music-progress input { flex:1;min-width:0; }
-  .music-controls { display:flex;align-items:center;gap:12px; }
-  .icon-btn { width:42px;height:42px;border:1px solid rgba(150,190,225,.22);border-radius:50%;background:rgba(255,255,255,.07);color:inherit;cursor:pointer; }
-  .icon-btn.play-btn { width:52px;height:52px;background:var(--accent-user);color:#142334; }
-  .volume-control { display:flex;align-items:center;gap:8px;margin-left:auto;max-width:145px; }
-  .music-playlist { display:grid;gap:7px;margin-top:16px;max-height:180px;overflow:auto; }
-  .playlist-track,.note-item,.event-item { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.055);border:1px solid transparent; }
-  .playlist-track { cursor:pointer;text-align:left;color:inherit; }
-  .playlist-track.active,.note-item.active { border-color:var(--accent-user);background:rgba(139,202,255,.11); }
-  .notes-toolbar { display:flex;gap:10px; }
-  .notes-layout { display:grid;grid-template-columns:minmax(180px,.75fr) minmax(0,1.5fr);gap:16px;margin-top:18px; }
-  .notes-list { display:grid;align-content:start;gap:8px;max-height:420px;overflow:auto; }
-  .note-item { cursor:pointer;display:block;text-align:left;color:inherit;width:100%; }
-  .note-item strong,.note-item small { display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-  .note-item small { color:var(--text-muted);margin-top:4px; }
-  .note-editor { display:grid;gap:12px;align-content:start; }
-  .note-editor textarea { resize:vertical;min-height:190px; }
-  .monitor-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px; }
-  .monitor-card { display:flex;flex-direction:column;gap:9px;min-width:0; }
-  .monitor-card i { color:var(--accent-user);font-size:1.2rem; }
-  .monitor-card span { color:var(--text-muted);font-size:.8rem; }
-  .monitor-card strong { font-size:1rem;overflow-wrap:anywhere; }
-  .monitor-card.wide { grid-column:1/-1; }
-  .event-list { display:grid;gap:9px;margin-top:18px; }
-  .event-item small { display:block;color:var(--text-muted);margin-top:4px; }
-  .event-item button { border:0;background:transparent;color:#ff8d9a;cursor:pointer;padding:8px; }
-  .assistant-panel { max-width:850px; }
-  .assistant-online { color:#75d6a0;font-size:.75rem; }
-  .assistant-chat { height:310px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:16px;background:rgba(0,0,0,.10); }
-  .chat-bubble { max-width:85%;padding:12px 15px;border-radius:15px;line-height:1.5;font-size:.9rem;white-space:pre-wrap; }
-  .chat-bubble.bot { align-self:flex-start;background:rgba(139,202,255,.13); }
-  .chat-bubble.user { align-self:flex-end;background:rgba(139,202,255,.24); }
-  .assistant-form,.weather-search { display:flex;gap:9px;margin-top:13px; }
-  .assistant-form button { flex:none; }
-  .weather-search input { flex:1; }
-  .weather-result { text-align:center;padding:25px 12px 18px; }
-  .weather-result>i { font-size:3rem;color:var(--accent-user); }
-  .weather-result h3 { font-size:2rem;margin:12px 0 5px; }
-  .weather-result p { color:var(--text-muted); }
-  .weather-forecast { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px; }
-  .forecast-day { text-align:center;padding:13px 8px;border-radius:14px;background:rgba(255,255,255,.06); }
-  .forecast-day strong,.forecast-day span { display:block;margin:5px 0; }
-  .forecast-day span { color:var(--text-muted);font-size:.78rem; }
-  [data-theme="light"] .field-label input,[data-theme="light"] .field-label select,[data-theme="light"] .notes-toolbar input,[data-theme="light"] .note-editor input,[data-theme="light"] .note-editor textarea,[data-theme="light"] .assistant-form input,[data-theme="light"] .weather-search input { background:rgba(255,255,255,.65);color:#243447; }
-  @media(max-width:700px) {
-    .feature-grid,.notes-layout { grid-template-columns:1fr; }
-    .music-layout { grid-template-columns:1fr; }
-    .music-art { width:130px;height:130px;font-size:3.6rem;margin:auto; }
-    .monitor-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .weather-forecast { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .weather-search { flex-wrap:wrap; }
-    .weather-search input { flex-basis:100%; }
-    .notes-toolbar { flex-direction:column; }
-  }
-
-  .assistant-connect { display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-bottom:14px; }
-  .assistant-connect .field-label { min-width:0; }
-  .assistant-form textarea { flex:1;min-width:0;resize:vertical;max-height:150px;padding:12px 14px;border-radius:13px;border:1px solid rgba(150,190,225,.22);background:rgba(20,35,55,.25);color:inherit;outline:none;font:inherit; }
-  .assistant-bottom { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px; }
-  .assistant-bottom .feature-note { margin:0; }
-  .assistant-form button { align-self:stretch;min-width:48px; }
-  .assistant-chat .chat-bubble { overflow-wrap:anywhere; }
-  .assistant-chat .chat-bubble.pending { opacity:.7;font-style:italic; }
-  @media(max-width:600px) { .assistant-connect { grid-template-columns:1fr; } .assistant-bottom { align-items:flex-start;flex-direction:column; } }
-</style>
-
-
 <style id="slavvtech-final-polish">
   /* Independent feature cards: each tool has its own compact glass surface. */
   .page-section,.page-section.is-active,.page-section.is-leaving {
@@ -1126,21 +1018,20 @@
   .side-nav{padding-bottom:18px}
 </style>
 \n
-<style id="funzone-style">
-.funzone-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1100px;margin:28px auto}
-.funzone-card{min-width:0;padding:22px;border:1px solid var(--glass-edge);border-radius:22px;background:var(--glass-bg);backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 var(--glass-highlight),0 14px 40px rgba(0,0,0,.12)}
-.funzone-card h3{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:1.12rem}
-.funzone-card h3 i{color:var(--primary)}
-.funzone-card p{color:var(--text-muted);font-size:.88rem;line-height:1.6}
-.funzone-word{font:700 clamp(1.7rem,5vw,2.5rem) 'Orbitron',sans-serif;letter-spacing:.18em;text-align:center;margin:22px 0;color:var(--primary);overflow-wrap:anywhere}
-.funzone-card input{width:100%;margin-top:12px;padding:13px 14px;border:1px solid var(--glass-edge);border-radius:12px;background:rgba(20,35,55,.24);color:var(--text);font:inherit}
-.funzone-result{min-height:28px;margin-top:13px!important;font-weight:600}
-.funzone-number{font:700 2.5rem 'Orbitron',sans-serif;text-align:center;margin:20px 0;color:var(--primary)}
-.funzone-joke{font-size:1.05rem!important;line-height:1.8!important;padding:18px;margin:18px 0;border-radius:15px;background:rgba(139,202,255,.08);border:1px solid var(--glass-edge);min-height:100px}
-.funzone-card .feature-actions{gap:9px}
-@media(max-width:700px){.funzone-grid{grid-template-columns:1fr}.funzone-card{padding:18px}}
-</style>
 
+<style id="sidebar-cleanup">
+
+/* Sidebar cleanup: clear groups, consistent alignment, and compact navigation. */
+.side-nav{gap:7px;padding:4px 6px 16px 0}
+.nav-group-label{padding:16px 12px 5px;font-size:.64rem;letter-spacing:1.7px}
+.nav-group-label:first-child{padding-top:4px}
+.side-link{min-height:48px;padding:0 12px;gap:12px;border-radius:13px;font-size:.88rem}
+.side-icon{width:30px;height:30px;flex:0 0 30px;border-radius:10px}
+.side-link>span:not(.side-icon){flex:1;min-width:0}
+.sidebar-heading{padding-bottom:18px}
+.sidebar-bottom{padding-top:12px}
+@media(max-width:900px){.sidebar{width:min(300px,calc(100vw - 36px))}}
+</style>
 </head>
 <body>
   <div class="bg-effects">
@@ -1187,19 +1078,14 @@
       <a href="#weather" class="side-link" data-section="weather"><span class="side-icon"><i class="fas fa-cloud-sun"></i></span><span>Weather</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#calculator" class="side-link" data-section="calculator"><span class="side-icon"><i class="fas fa-calculator"></i></span><span>Calculator</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#device" class="side-link" data-section="device"><span class="side-icon"><i class="fas fa-microchip"></i></span><span>Device Info</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <div class="nav-group-label">TOOLS</div>
-      <a href="#kamera" class="side-link" data-section="kamera"><span class="side-icon"><i class="fas fa-camera"></i></span><span>Camera</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <a href="#customizer" class="side-link" data-section="customizer"><span class="side-icon"><i class="fas fa-palette"></i></span><span>Themes</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <a href="#memori" class="side-link" data-section="memori"><span class="side-icon"><i class="fas fa-images"></i></span><span>Photos</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <div class="nav-group-label">FUN</div>
+      <div class="nav-group-label">LIBRARY &amp; TOOLS</div>
+<a href="#memori" class="side-link" data-section="memori"><span class="side-icon"><i class="fas fa-images"></i></span><span>Photos</span><i class="fas fa-arrow-right side-arrow"></i></a>
+      <div class="nav-group-label">CREATION</div>
       <a href="#game" class="side-link" data-section="game"><span class="side-icon"><i class="fas fa-gamepad"></i></span><span>Arcade</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#music" class="side-link" data-section="music"><span class="side-icon"><i class="fas fa-music"></i></span><span>Music</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#ustadzquote" class="side-link" data-section="ustadzquote"><span class="side-icon"><i class="fas fa-mosque"></i></span><span>Quote Maker</span><i class="fas fa-arrow-right side-arrow"></i></a>
       <a href="#musiccard" class="side-link" data-section="musiccard"><span class="side-icon"><i class="fas fa-compact-disc"></i></span><span>Music Card</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <a href="#enhancer" class="side-link" data-section="enhancer"><span class="side-icon"><i class="fas fa-wand-magic-sparkles"></i></span><span>Enhancer</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <a href="#sticker" class="side-link" data-section="sticker"><span class="side-icon"><i class="fas fa-face-grin-tears"></i></span><span>Meme Maker</span><i class="fas fa-arrow-right side-arrow"></i></a>
-      <a href="#funzone" class="side-link" data-section="funzone"><span class="side-icon"><i class="fas fa-puzzle-piece"></i></span><span>Fun Zone</span><i class="fas fa-arrow-right side-arrow"></i></a>
-    </nav>
+</nav>
     <div class="sidebar-bottom"><span class="status-dot"></span><span>ONLINE</span></div>
   </aside>
   <div class="page-progress" id="page-progress"><span></span></div>
@@ -1375,81 +1261,10 @@
 
 
   <!-- CAMERA STUDIO -->
-  <section id="kamera" class="page-section" aria-hidden="true">
-    <h2 class="section-title fade-up">Camera <span>Studio</span></h2>
-    <div class="camera-panel fade-up">
-      <div class="camera-stage" id="camera-stage">
-        <video id="camera-video" autoplay playsinline muted></video>
-        <div class="camera-placeholder" id="camera-placeholder">
-          <i class="fas fa-camera"></i>
-          <strong>Kamera belum aktif</strong>
-          
-        </div>
-        <span class="camera-live" id="camera-live" hidden><i class="fas fa-circle" style="color:#ff6868"></i> LIVE PREVIEW</span>
-      </div>
 
-      <div class="camera-controls">
-        <button class="btn btn-primary" id="camera-start"><i class="fas fa-video"></i> Aktifkan Kamera</button>
-        <button class="btn btn-outline" id="camera-switch" disabled><i class="fas fa-camera-rotate"></i> Ganti Kamera</button>
-        <button class="btn btn-outline" id="camera-capture" disabled><i class="fas fa-camera"></i> Potret</button>
-        <button class="btn btn-outline" id="camera-stop" disabled><i class="fas fa-stop"></i> Matikan</button>
-      </div>
+<!-- THEME CUSTOMIZER -->
 
-      <div class="camera-options">
-        <label>Filter
-          <select id="camera-filter">
-            <option value="none">Normal</option>
-            <option value="grayscale(1)">Hitam Putih</option>
-            <option value="sepia(.55)">Vintage</option>
-            <option value="saturate(1.5) contrast(1.08)">Vivid</option>
-            <option value="brightness(1.12) contrast(1.08)">Cerah</option>
-            <option value="contrast(1.18) saturate(.8)">Cinematic</option>
-          </select>
-        </label>
-        <label>Background studio
-          <select id="camera-background">
-            <option value="linear-gradient(135deg,#1c3448,#111923 55%,#52677a)">Midnight Blue</option>
-            <option value="linear-gradient(135deg,#25213b,#51436d,#171827)">Purple Haze</option>
-            <option value="linear-gradient(135deg,#16443e,#182b35,#4d7468)">Emerald</option>
-            <option value="linear-gradient(135deg,#684b35,#25202a,#9a7960)">Warm Studio</option>
-            <option value="linear-gradient(135deg,#e7edf3,#9eafc1,#d4dce5)">Soft Silver</option>
-          </select>
-        </label>
-        <label><input type="checkbox" id="camera-mirror" checked> Mirror selfie</label>
-        <label>Foto latar studio <input type="file" id="camera-bg-upload" accept="image/*"></label>
-      </div>
-      <p class="camera-status" id="camera-status" aria-live="polite">Kamera belum dijalankan. Akses hanya diminta setelah kamu menekan tombol aktifkan.</p>
-
-      <div class="camera-result" id="camera-result">
-        <h3 style="margin:8px 0 12px">Hasil Potret</h3>
-        <img id="camera-photo" alt="Hasil foto kamera">
-        <div class="camera-result-actions">
-          <a class="btn btn-primary" id="camera-download" download="slavvtech-photo.png"><i class="fas fa-download"></i> Simpan Foto</a>
-          <button class="btn btn-outline" id="camera-retake"><i class="fas fa-rotate"></i> Foto Ulang</button>
-        </div>
-      </div>
-      
-    </div>
-  </section>
-
-
-
-  <!-- THEME CUSTOMIZER -->
-  <section id="customizer" class="page-section" aria-hidden="true">
-    <h2 class="section-title fade-up">Theme <span>Customizer</span></h2>
-    <div class="feature-panel glass-panel fade-up">
-      <div class="feature-heading"><i class="fas fa-palette"></i><div><h3>Appearance Studio</h3><p>Pengaturan disimpan otomatis di browser ini.</p></div></div>
-      <div class="feature-grid">
-        <label class="field-label">Warna aksen <input type="color" id="accent-color" value="#8bcaff"></label>
-        <label class="field-label">Mode tampilan <select id="appearance-mode"><option value="dark">Dark Glass</option><option value="light">Light Glass</option></select></label>
-        <label class="field-label">Wallpaper latar <input type="file" id="wallpaper-upload" accept="image/*"></label>
-        <label class="field-label">Intensitas kaca <input type="range" id="glass-opacity" min="10" max="85" value="38"></label>
-      </div>
-      <div class="feature-actions"><button class="btn btn-outline" id="reset-theme"><i class="fas fa-rotate-left"></i> Reset Tampilan</button></div>
-    </div>
-  </section>
-
-  <!-- MUSIC PLAYER -->
+<!-- MUSIC PLAYER -->
   <section id="music" class="page-section" aria-hidden="true">
     <h2 class="section-title fade-up">Music <span>Player</span></h2>
     <div class="feature-panel glass-panel fade-up music-layout">
@@ -1583,188 +1398,13 @@
 
 
   <!-- PHOTO & VIDEO ENHANCER -->
-  <section id="enhancer" class="page-section" aria-hidden="true">
-    <h2 class="section-title fade-up">Photo &amp; Video <span>Enhancer</span></h2>
-    <p class="section-sub">Tingkatkan tampilan foto dan video dengan kontrol cahaya, kontras, warna, dan resolusi. Pemrosesan dilakukan langsung di browser.</p>
-    <div class="feature-panel glass-panel fade-up enhancer-panel">
-      <div class="enhancer-controls">
-        <label class="field-label">Pilih foto atau video
-          <input id="enhancer-file" type="file" accept="image/*,video/*">
-        </label>
-        <label class="field-label">Resolusi ekspor foto
-          <select id="enhancer-scale"><option value="1">Asli</option><option value="2" selected>2× HD</option><option value="4">4× Ultra HD (interpolasi)</option></select>
-        </label>
-        <label class="field-label">Kecerahan <output id="enhancer-brightness-value">100%</output>
-          <input id="enhancer-brightness" type="range" min="50" max="160" value="108">
-        </label>
-        <label class="field-label">Kontras <output id="enhancer-contrast-value">100%</output>
-          <input id="enhancer-contrast" type="range" min="50" max="180" value="112">
-        </label>
-        <label class="field-label">Saturasi <output id="enhancer-saturate-value">100%</output>
-          <input id="enhancer-saturate" type="range" min="0" max="200" value="112">
-        </label>
-        <label class="field-label">Ketajaman <output id="enhancer-sharp-value">0</output>
-          <input id="enhancer-sharp" type="range" min="0" max="100" value="18">
-        </label>
-      </div>
-      <div class="enhancer-preview"><canvas id="enhancer-canvas" width="960" height="600"></canvas><video id="enhancer-video" playsinline muted hidden></video><div id="enhancer-empty">Pilih foto atau video untuk mulai meningkatkan kualitas.</div></div>
-      <div class="enhancer-actions">
-        <button class="btn btn-primary" id="enhancer-download-image" type="button"><i class="fas fa-image"></i> Download Foto PNG</button>
-        <button class="btn btn-primary" id="enhancer-export-video" type="button"><i class="fas fa-film"></i> Ekspor Video</button>
-        <button class="btn btn-outline" id="enhancer-reset" type="button"><i class="fas fa-rotate-left"></i> Reset</button>
-      </div>
-      <p class="muted-text" id="enhancer-status" aria-live="polite">Foto diekspor sebagai PNG resolusi pilihan. Video direkam dari preview yang sudah diberi efek; audio asli tidak disertakan.</p>
-    </div>
-  </section>
 
-  <!-- MEME STICKER CREATOR -->
-  <section id="sticker" class="page-section" aria-hidden="true">
-    <h2 class="section-title fade-up">Meme <span>Sticker Maker</span></h2>
-    <p class="section-sub">Unggah gambar, tambahkan teks meme, lalu ekspor hasilnya sebagai PNG.</p>
-    <div class="feature-panel glass-panel fade-up sticker-panel">
-      <div class="sticker-controls">
-        <label class="field-label">Pilih gambar<input id="sticker-image" type="file" accept="image/*"></label>
-        <label class="field-label">Teks atas<input id="sticker-top" type="text" maxlength="80" placeholder="KETIKA DISURUH..." value="KETIKA DISURUH..."></label>
-        <label class="field-label">Teks bawah<input id="sticker-bottom" type="text" maxlength="80" placeholder="TAPI MALAH..."></label>
-        <label class="field-label">Ukuran teks <input id="sticker-size" type="range" min="20" max="76" value="42"></label>
-        <label class="field-label">Warna teks <select id="sticker-color"><option value="#ffffff">Putih</option><option value="#ffff00">Kuning</option><option value="#000000">Hitam</option></select></label>
-      </div>
-      <div class="sticker-preview-wrap"><canvas id="sticker-canvas" width="720" height="720" aria-label="Pratinjau stiker meme"></canvas></div>
-      <div class="feature-actions"><button class="btn btn-primary" id="sticker-download" type="button"><i class="fas fa-download"></i> Download PNG</button><button class="btn btn-outline" id="sticker-reset" type="button"><i class="fas fa-rotate-left"></i> Reset</button></div>
-      <p class="muted-text" id="sticker-status" aria-live="polite">Pilih gambar untuk mulai membuat stiker. Pemrosesan dilakukan di browser.</p>
-    </div>
-  </section>
+<!-- MEME STICKER CREATOR -->
+
+<!-- FUN ZONE: WORD PUZZLE, RANDOM NUMBER, JOKE GENERATOR -->
 
 
-
-  <!-- FUN ZONE: WORD PUZZLE, RANDOM NUMBER, JOKE GENERATOR -->
-  <section id="funzone" class="page-section" aria-hidden="true">
-    <h2 class="section-title fade-up">SlavvTech <span>Fun Zone</span></h2>
-    <p class="section-sub">Mainkan teka-teki kata, tebak angka acak, atau buat suasana lebih seru dengan lelucon ringan.</p>
-    <div class="funzone-grid">
-      <article class="funzone-card fade-up">
-        <h3><i class="fas fa-puzzle-piece"></i> Word Puzzle</h3>
-        <p>Susun huruf acak menjadi kata yang benar. Gunakan petunjuk jika diperlukan.</p>
-        <div class="funzone-word" id="wp-scramble">????</div>
-        <p id="wp-hint">Tekan “Kata Baru” untuk mulai.</p>
-        <input id="wp-answer" type="text" autocomplete="off" placeholder="Tulis jawabanmu...">
-        <div class="feature-actions">
-          <button class="btn btn-primary" id="wp-check" type="button">Periksa</button>
-          <button class="btn btn-outline" id="wp-new" type="button">Kata Baru</button>
-          <button class="btn btn-outline" id="wp-hint-btn" type="button">Petunjuk</button>
-        </div>
-        <p class="funzone-result" id="wp-result" aria-live="polite"></p>
-        <p>Skor: <strong id="wp-score">0</strong></p>
-      </article>
-      <article class="funzone-card fade-up">
-        <h3><i class="fas fa-dice"></i> Random Number</h3>
-        <p>Tebak angka rahasia dari 1 sampai 100. Sistem akan memberi petunjuk lebih tinggi atau lebih rendah.</p>
-        <div class="funzone-number" id="rn-display">?</div>
-        <input id="rn-guess" type="number" min="1" max="100" placeholder="Masukkan angka 1–100">
-        <div class="feature-actions">
-          <button class="btn btn-primary" id="rn-check" type="button">Tebak</button>
-          <button class="btn btn-outline" id="rn-reset" type="button">Mulai Ulang</button>
-        </div>
-        <p class="funzone-result" id="rn-result" aria-live="polite">Masukkan tebakan pertamamu.</p>
-        <p>Percobaan: <strong id="rn-attempts">0</strong></p>
-      </article>
-      <article class="funzone-card fade-up">
-        <h3><i class="fas fa-face-laugh"></i> Joke Generator</h3>
-        <p>Butuh hiburan sebentar? Tekan tombol untuk mendapatkan lelucon singkat.</p>
-        <div class="funzone-joke" id="joke-output" aria-live="polite">Lelucon hari ini akan muncul di sini. 😄</div>
-        <div class="feature-actions">
-          <button class="btn btn-primary" id="joke-generate" type="button"><i class="fas fa-shuffle"></i> Generate Joke</button>
-          <button class="btn btn-outline" id="joke-copy" type="button"><i class="fas fa-copy"></i> Salin</button>
-        </div>
-        <p class="funzone-result" id="joke-status" aria-live="polite"></p>
-      </article>
-    </div>
-  </section>
-
-  <script id="funzone-script">
-  (() => {
-    const $ = id => document.getElementById(id);
-    // WORD PUZZLE
-    const words = [
-      {word:'KOMPUTER',hint:'Perangkat elektronik untuk mengolah data.'},
-      {word:'JARINGAN',hint:'Koneksi yang menghubungkan beberapa perangkat.'},
-      {word:'BROWSER',hint:'Aplikasi untuk membuka halaman internet.'},
-      {word:'SEKOLAH',hint:'Tempat untuk belajar.'},
-      {word:'MATAHARI',hint:'Bintang yang menjadi pusat tata surya kita.'},
-      {word:'KEYBOARD',hint:'Perangkat untuk mengetik.'},
-      {word:'GALAKSI',hint:'Kumpulan bintang, gas, dan debu kosmik.'},
-      {word:'KAMERA',hint:'Alat untuk mengambil foto atau video.'},
-      {word:'INTERNET',hint:'Jaringan global yang menghubungkan banyak komputer.'},
-      {word:'ALGORITMA',hint:'Urutan langkah logis untuk menyelesaikan masalah.'}
-    ];
-    let currentWord = null, wpScore = 0, hintShown = false;
-    function scramble(word) {
-      let chars = word.split('');
-      for (let i=chars.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [chars[i],chars[j]]=[chars[j],chars[i]]; }
-      if(chars.join('')===word && chars.length>1) chars.push(chars.shift());
-      return chars.join(' ');
-    }
-    function newWord() {
-      const pool=words.filter(w=>w!==currentWord);
-      currentWord=pool[Math.floor(Math.random()*pool.length)];
-      $('wp-scramble').textContent=scramble(currentWord.word);
-      $('wp-hint').textContent='Petunjuk tersedia jika kamu membutuhkannya.';
-      $('wp-answer').value=''; $('wp-result').textContent=''; hintShown=false;
-    }
-    $('wp-new').addEventListener('click',newWord);
-    $('wp-hint-btn').addEventListener('click',()=>{if(!currentWord)return;$('wp-hint').textContent='Petunjuk: '+currentWord.hint;hintShown=true;});
-    function checkWord(){
-      if(!currentWord)return;
-      const answer=$('wp-answer').value.trim().toUpperCase();
-      if(!answer){$('wp-result').textContent='Masukkan jawaban terlebih dahulu.';return;}
-      if(answer===currentWord.word){wpScore++;$('wp-score').textContent=wpScore;$('wp-result').textContent='Benar! Hebat, kamu berhasil. +1 poin';newWord();}
-      else $('wp-result').textContent='Belum tepat. Coba lagi!';
-    }
-    $('wp-check').addEventListener('click',checkWord);
-    $('wp-answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWord();});
-    newWord();
-
-    // RANDOM NUMBER
-    let secret=Math.floor(Math.random()*100)+1, attempts=0, finished=false;
-    function resetNumber(){secret=Math.floor(Math.random()*100)+1;attempts=0;finished=false;$('rn-display').textContent='?';$('rn-attempts').textContent='0';$('rn-result').textContent='Angka baru sudah dipilih. Tebak dari 1 sampai 100.';$('rn-guess').value='';$('rn-guess').disabled=false;$('rn-check').disabled=false;}
-    $('rn-check').addEventListener('click',()=>{
-      if(finished)return;
-      const guess=Number($('rn-guess').value);
-      if(!Number.isInteger(guess)||guess<1||guess>100){$('rn-result').textContent='Masukkan bilangan bulat antara 1 dan 100.';return;}
-      attempts++;$('rn-attempts').textContent=attempts;
-      if(guess===secret){$('rn-display').textContent=secret;$('rn-result').textContent='Tepat! Kamu berhasil dalam '+attempts+' percobaan.';finished=true;$('rn-guess').disabled=true;$('rn-check').disabled=true;}
-      else $('rn-result').textContent=guess<secret?'Terlalu kecil. Coba angka yang lebih tinggi!':'Terlalu besar. Coba angka yang lebih rendah!';
-      $('rn-guess').value='';
-    });
-    $('rn-guess').addEventListener('keydown',e=>{if(e.key==='Enter')$('rn-check').click();});
-    $('rn-reset').addEventListener('click',resetNumber);
-
-    // JOKE GENERATOR
-    const jokes=[
-      'Kenapa komputer suka kedinginan? Karena sering buka Windows!',
-      'Apa bedanya kalender dan kamu? Kalender punya tanggal, kalau kamu punya tempat spesial.',
-      'Kenapa Wi-Fi jarang bertengkar? Karena selalu mencari koneksi.',
-      'Kenapa buku matematika terlihat sedih? Karena punya banyak masalah.',
-      'Apa yang dilakukan awan saat haus? Minum hujan.',
-      'Kenapa programmer tidak suka alam? Terlalu banyak bug.',
-      'Ikan apa yang paling sabar? Ikan yang menunggu umpan.',
-      'Kenapa jam tidak pernah lapar? Karena selalu punya detik untuk makan.'
-    ];
-    let lastJoke=-1;
-    $('joke-generate').addEventListener('click',()=>{
-      let i=Math.floor(Math.random()*jokes.length);
-      if(jokes.length>1&&i===lastJoke)i=(i+1)%jokes.length;
-      lastJoke=i;$('joke-output').textContent=jokes[i];$('joke-status').textContent='';
-    });
-    $('joke-copy').addEventListener('click',async()=>{
-      const joke=$('joke-output').textContent;
-      try{await navigator.clipboard.writeText(joke);$('joke-status').textContent='Lelucon berhasil disalin.';}
-      catch(e){$('joke-status').textContent='Fitur salin tidak tersedia di browser ini.';}
-    });
-  })();
-  </script>
-
-  <script>
+<script>
     const root = document.documentElement;
     const themeBtn = document.getElementById('theme-toggle');
     const themeIcon = themeBtn.querySelector('i');
@@ -2015,140 +1655,7 @@
 
 
 
-    // Camera Studio: capture locally with device camera permission.
-    (() => {
-      const video = document.getElementById('camera-video');
-      if (!video) return;
-      const stage = document.getElementById('camera-stage');
-      const placeholder = document.getElementById('camera-placeholder');
-      const live = document.getElementById('camera-live');
-      const startBtn = document.getElementById('camera-start');
-      const switchBtn = document.getElementById('camera-switch');
-      const captureBtn = document.getElementById('camera-capture');
-      const stopBtn = document.getElementById('camera-stop');
-      const filterSelect = document.getElementById('camera-filter');
-      const backgroundSelect = document.getElementById('camera-background');
-      const mirrorToggle = document.getElementById('camera-mirror');
-      const backgroundUpload = document.getElementById('camera-bg-upload');
-      const status = document.getElementById('camera-status');
-      const result = document.getElementById('camera-result');
-      const photo = document.getElementById('camera-photo');
-      const download = document.getElementById('camera-download');
-      let stream = null;
-      let facingMode = 'user';
-      let customBackgroundUrl = null;
-
-      function updatePreview() {
-        video.style.filter = filterSelect.value === 'none' ? 'none' : filterSelect.value;
-        video.classList.toggle('mirrored', mirrorToggle.checked && facingMode === 'user');
-      }
-      function setRunning(isRunning) {
-        placeholder.hidden = isRunning;
-        live.hidden = !isRunning;
-        captureBtn.disabled = !isRunning;
-        stopBtn.disabled = !isRunning;
-        switchBtn.disabled = !isRunning;
-        startBtn.disabled = isRunning;
-      }
-      async function startCamera() {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          status.textContent = 'Browser tidak mendukung akses kamera atau halaman belum menggunakan HTTPS.';
-          return;
-        }
-        stopCamera();
-        status.textContent = 'Meminta izin kamera...';
-        try {
-          stream = await navigator.mediaDevices.getUserMedia({
-            audio: false,
-            video: { facingMode: { ideal: facingMode }, width: { ideal: 1920 }, height: { ideal: 1080 } }
-          });
-          video.srcObject = stream;
-          await video.play();
-          setRunning(true);
-          updatePreview();
-          status.textContent = 'Kamera aktif. Atur filter dan tekan Potret untuk mengambil foto.';
-        } catch (error) {
-          setRunning(false);
-          const messages = {
-            NotAllowedError: 'Izin kamera ditolak. Izinkan kamera melalui pengaturan situs/browser.',
-            NotFoundError: 'Kamera tidak ditemukan pada perangkat ini.',
-            NotReadableError: 'Kamera sedang digunakan aplikasi lain.'
-          };
-          status.textContent = messages[error.name] || 'Kamera gagal dibuka. Periksa izin dan koneksi kamera perangkat.';
-        }
-      }
-      function stopCamera() {
-        if (stream) stream.getTracks().forEach(track => track.stop());
-        stream = null;
-        video.srcObject = null;
-        setRunning(false);
-        live.hidden = true;
-        placeholder.hidden = false;
-      }
-      function takePhoto() {
-        if (!stream || !video.videoWidth) return;
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.filter = filterSelect.value === 'none' ? 'none' : filterSelect.value;
-        const mirror = mirrorToggle.checked && facingMode === 'user';
-        if (mirror) {
-          ctx.translate(canvas.width, 0);
-          ctx.scale(-1, 1);
-        }
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const dataUrl = canvas.toDataURL('image/png');
-        photo.src = dataUrl;
-        download.href = dataUrl;
-        result.classList.add('show');
-        status.textContent = 'Foto berhasil diambil. Kamu bisa menyimpannya ke perangkat.';
-      }
-      startBtn.addEventListener('click', startCamera);
-      stopBtn.addEventListener('click', () => {
-        stopCamera();
-        status.textContent = 'Kamera telah dimatikan.';
-      });
-      switchBtn.addEventListener('click', async () => {
-        facingMode = facingMode === 'user' ? 'environment' : 'user';
-        await startCamera();
-      });
-      captureBtn.addEventListener('click', takePhoto);
-      document.getElementById('camera-retake').addEventListener('click', () => {
-        result.classList.remove('show');
-        status.textContent = 'Silakan ambil foto lagi.';
-      });
-      filterSelect.addEventListener('change', updatePreview);
-      mirrorToggle.addEventListener('change', updatePreview);
-      backgroundSelect.addEventListener('change', () => {
-        stage.style.backgroundImage = backgroundSelect.value;
-        if (customBackgroundUrl) {
-          URL.revokeObjectURL(customBackgroundUrl);
-          customBackgroundUrl = null;
-        }
-      });
-      backgroundUpload.addEventListener('change', () => {
-        const file = backgroundUpload.files && backgroundUpload.files[0];
-        if (!file) return;
-        if (customBackgroundUrl) URL.revokeObjectURL(customBackgroundUrl);
-        customBackgroundUrl = URL.createObjectURL(file);
-        stage.style.backgroundImage = `url("${customBackgroundUrl}")`;
-        status.textContent = 'Foto latar studio dipasang pada area bingkai kamera.';
-      });
-      window.addEventListener('pagehide', stopCamera);
-    })();
-
-
-
-    // Theme Customizer: persisted locally.
-    (() => {
-      const root = document.documentElement;
-      const accent = document.getElementById('accent-color');
-      const mode = document.getElementById('appearance-mode');
-      const opacity = document.getElementById('glass-opacity');
-      const wallpaper = document.getElementById('wallpaper-upload');
-      const saved = (() => { try { return JSON.parse(localStorage.getItem('slavvTheme') || '{}'); } catch (_) { return {}; } })();
-      function applyTheme() {
+    function applyTheme() {
         root.style.setProperty('--accent-user', accent.value);
         root.style.setProperty('--primary', accent.value);
         root.style.setProperty('--glass-user', opacity.value + '%');
@@ -2524,53 +2031,8 @@
       el('mc-download').addEventListener('click',()=>{draw();canvas.toBlob(blob=>{if(!blob){el('mc-status').textContent='Gagal membuat PNG.';return;}const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='slavvtech-music-player-card.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);el('mc-status').textContent='Gambar PNG berhasil dibuat.'},' image/png'.trim());});
       el('mc-reset').addEventListener('click',()=>{el('mc-cover').value='';ids.forEach(id=>{const e=el(id);if(id==='mc-title')e.value='Merry Christmas, i miss you';if(id==='mc-artist')e.value='Alex Crichton';if(id==='mc-toplabel')e.value='Merry Christmas, I wish you';if(id==='mc-side')e.value='Alex Crichton';if(id==='mc-current')e.value='3:16';if(id==='mc-duration')e.value='4:07';if(id==='mc-device')e.value='AirPods';if(id==='mc-bg')e.value='#77727a';});cover=null;if(coverUrl)URL.revokeObjectURL(coverUrl);coverUrl=null;draw();el('mc-status').textContent='Form direset.';});draw();
     })();
-
-
-    // Meme sticker editor: image rendering and PNG export stay on-device.
-    (() => {
-      const canvas=document.getElementById('sticker-canvas'); if(!canvas)return;
-      const ctx=canvas.getContext('2d'), file=document.getElementById('sticker-image');
-      const top=document.getElementById('sticker-top'), bottom=document.getElementById('sticker-bottom');
-      const size=document.getElementById('sticker-size'), color=document.getElementById('sticker-color');
-      const status=document.getElementById('sticker-status'); let photo=null, objectUrl=null;
-      function draw(){
-        const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);
-        if(photo){const scale=Math.max(w/photo.width,h/photo.height),sw=w/scale,sh=h/scale,sx=(photo.width-sw)/2,sy=(photo.height-sh)/2;ctx.drawImage(photo,sx,sy,sw,sh,0,0,w,h)}
-        else {ctx.fillStyle='#27364a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#a9c8e8';ctx.textAlign='center';ctx.font='bold 28px Arial';ctx.fillText('UPLOAD GAMBAR UNTUK MEMULAI',w/2,h/2)}
-        const font=Math.max(20,Number(size.value)||42);ctx.font=`900 ${font}px Impact, Arial Black, sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.miterLimit=2;
-        const lines=[{t:top.value,y:font*.85},{t:bottom.value,y:h-font*.85}];
-        lines.forEach(({t,y})=>{if(!t.trim())return;let text=t.toLocaleUpperCase();while(ctx.measureText(text).width>w-38&&ctx.font.match(/\d+/)){const f=Math.max(16,parseInt(ctx.font.match(/\d+/)[0])-2);ctx.font=`900 ${f}px Impact, Arial Black, sans-serif`;if(f===16)break;}ctx.lineWidth=Math.max(4,font*.13);ctx.strokeStyle=color.value==='#000000'?'#fff':'#111';ctx.fillStyle=color.value;ctx.strokeText(text,w/2,y,w-30);ctx.fillText(text,w/2,y,w-30);ctx.font=`900 ${font}px Impact, Arial Black, sans-serif`;});
-      }
-      file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(!f.type.startsWith('image/')){status.textContent='File harus berupa gambar.';return;}if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(f);const img=new Image();img.onload=()=>{photo=img;draw();status.textContent='Gambar siap. Atur teks lalu download PNG.'};img.onerror=()=>status.textContent='Gambar tidak dapat dibuka.';img.src=objectUrl;});
-      [top,bottom,size,color].forEach(el=>el.addEventListener('input',draw));
-      document.getElementById('sticker-download').addEventListener('click',()=>{if(!photo){status.textContent='Pilih gambar terlebih dahulu.';return;}draw();canvas.toBlob(blob=>{if(!blob){status.textContent='Gagal membuat PNG.';return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='slavvtech-meme-sticker.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Stiker PNG berhasil disiapkan.'},' image/png'.trim());});
-      document.getElementById('sticker-reset').addEventListener('click',()=>{file.value='';top.value='';bottom.value='';size.value=42;color.value='#ffffff';photo=null;draw();status.textContent='Pilih gambar untuk mulai membuat stiker.'});draw();
-    })();
-  </script>
-
-<style id="photo-video-enhancer-style">
-.enhancer-panel{max-width:980px}.enhancer-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.enhancer-controls input[type=range]{width:100%;accent-color:var(--primary)}.enhancer-preview{position:relative;display:grid;place-items:center;min-height:240px;margin:20px auto;overflow:hidden;border-radius:18px;background:repeating-conic-gradient(#26364a 0% 25%,#1c293a 0% 50%) 50%/24px 24px}.enhancer-preview canvas{display:block;width:100%;max-height:68vh;object-fit:contain}.enhancer-preview video{display:none}.enhancer-preview #enhancer-empty{padding:30px;text-align:center;color:var(--text-muted)}.enhancer-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.enhancer-controls output{float:right;color:var(--primary);font-weight:700}@media(max-width:600px){.enhancer-actions{flex-direction:column}.enhancer-actions .btn{width:100%}}
-</style>
-
-<script id="photo-video-enhancer-script">
-(()=>{
- const $=id=>document.getElementById(id),file=$('enhancer-file'),canvas=$('enhancer-canvas'),ctx=canvas.getContext('2d'),video=$('enhancer-video'),empty=$('enhancer-empty'),status=$('enhancer-status');if(!file||!canvas)return;
- const controls=['brightness','contrast','saturate','sharp'];let source=null,kind='',url=null,raf=0,recorder=null;
- const vals=()=>({brightness:+$('enhancer-brightness').value,contrast:+$('enhancer-contrast').value,saturate:+$('enhancer-saturate').value,sharp:+$('enhancer-sharp').value});
- function updateLabels(){controls.forEach(k=>{$('enhancer-'+k+'-value').textContent=k==='sharp'?$('enhancer-sharp').value:$('enhancer-'+k).value+'%'})}
- function filter(){const v=vals();return `brightness(${v.brightness}%) contrast(${v.contrast}%) saturate(${v.saturate}%)`}
- function render(){if(!source)return;const w=kind==='video'?(video.videoWidth||960):source.naturalWidth,h=kind==='video'?(video.videoHeight||600):source.naturalHeight;if(!w||!h)return;const ratio=Math.min(1600/w,1000/h,1);canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.filter=filter();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(source,0,0,canvas.width,canvas.height);ctx.restore();const sharp=vals().sharp;if(sharp>0&&kind==='image')sharpen(sharp/100);}
- function sharpen(amount){const w=canvas.width,h=canvas.height;if(w*h>1800000)return;const img=ctx.getImageData(0,0,w,h),src=img.data,out=new Uint8ClampedArray(src),k=amount*.7;for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){let i=(y*w+x)*4;for(let c=0;c<3;c++)out[i+c]=Math.max(0,Math.min(255,src[i+c]*(1+4*k)-k*(src[i-4]+src[i+4]+src[i-w*4]+src[i+w*4])))}img.data.set(out);ctx.putImageData(img,0,0)}
- function loop(){if(kind!=='video'||video.paused||video.ended)return;render();raf=requestAnimationFrame(loop)}
- file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(url)URL.revokeObjectURL(url);cancelAnimationFrame(raf);source=null;url=URL.createObjectURL(f);empty.hidden=true;if(f.type.startsWith('image/')){kind='image';video.pause();video.hidden=true;const img=new Image();img.onload=()=>{source=img;render();status.textContent='Foto siap. Atur efek dan unduh hasil PNG.'};img.onerror=()=>status.textContent='Foto gagal dibuka.';img.src=url;}else if(f.type.startsWith('video/')){kind='video';video.hidden=true;video.src=url;video.onloadedmetadata=()=>{source=video;canvas.width=Math.min(video.videoWidth,1600);canvas.height=Math.round(canvas.width*video.videoHeight/video.videoWidth);render();video.play().then(()=>{loop();status.textContent='Video diputar dengan efek aktif. Ekspor akan merekam preview tanpa audio.'}).catch(()=>status.textContent='Tekan play pada video tidak tersedia; coba pilih file lain.');};}else status.textContent='Pilih file gambar atau video yang didukung browser.';});
- video.addEventListener('play',()=>{if(kind==='video')loop()});video.addEventListener('pause',()=>cancelAnimationFrame(raf));
- controls.forEach(k=>$('enhancer-'+k).addEventListener('input',()=>{updateLabels();if(kind==='video')render();else render()}));
- $('enhancer-download-image').addEventListener('click',()=>{if(kind!=='image'||!source){status.textContent='Pilih foto terlebih dahulu untuk ekspor PNG.';return;}const scale=+$('enhancer-scale').value,w=Math.min(source.naturalWidth*scale,8000),h=Math.round(w*source.naturalHeight/source.naturalWidth),out=document.createElement('canvas');out.width=w;out.height=h;const c=out.getContext('2d');c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';c.filter=filter();c.drawImage(source,0,0,w,h);c.filter='none';const sharp=vals().sharp;if(sharp>0&&w*h<1800000){const data=c.getImageData(0,0,w,h),a=data.data,b=new Uint8ClampedArray(a),k=sharp/100*.7;for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){let i=(y*w+x)*4;for(let ch=0;ch<3;ch++)b[i+ch]=Math.max(0,Math.min(255,a[i+ch]*(1+4*k)-k*(a[i-4+ch]+a[i+4+ch]+a[i-w*4+ch]+a[i+w*4+ch])))}data.data.set(b);c.putImageData(data,0,0)}out.toBlob(blob=>{if(!blob)return;const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='slavvtech-enhanced-photo.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500);status.textContent='Foto berhasil diekspor.'},' image/png'.trim())});
- $('enhancer-export-video').addEventListener('click',()=>{if(kind!=='video'||!source){status.textContent='Pilih video terlebih dahulu.';return;}if(!canvas.captureStream||!window.MediaRecorder){status.textContent='Browser ini belum mendukung ekspor video. Coba Chrome versi terbaru.';return;}const stream=canvas.captureStream(30),mime=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(t=>MediaRecorder.isTypeSupported(t));if(!mime){status.textContent='Format ekspor video tidak didukung browser.';return;}const chunks=[];try{recorder=new MediaRecorder(stream,{mimeType:mime});recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};recorder.onstop=()=>{const blob=new Blob(chunks,{type:mime}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='slavvtech-enhanced-video.webm';a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);stream.getTracks().forEach(t=>t.stop());status.textContent='Video selesai diekspor sebagai WebM tanpa audio.'};recorder.start();video.currentTime=0;video.play();const stop=()=>{if(recorder&&recorder.state==='recording')recorder.stop();video.removeEventListener('ended',stop)};video.addEventListener('ended',stop);status.textContent='Sedang merekam video dengan efek. Tunggu sampai selesai diputar.';}catch(e){stream.getTracks().forEach(t=>t.stop());status.textContent='Ekspor gagal: '+e.message}});
- $('enhancer-reset').addEventListener('click',()=>{controls.forEach(k=>$('enhancer-'+k).value=k==='brightness'||k==='contrast'||k==='saturate'?100:0);updateLabels();if(source)render();status.textContent='Pengaturan efek direset.'});
- updateLabels();window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);if(url)URL.revokeObjectURL(url)});
-})();
 </script>
+
 
 
 <style id="ustadz-quote-style">
