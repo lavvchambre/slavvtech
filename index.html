@@ -2031,29 +2031,7 @@
       el('mc-download').addEventListener('click',()=>{draw();canvas.toBlob(blob=>{if(!blob){el('mc-status').textContent='Gagal membuat PNG.';return;}const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='slavvtech-music-player-card.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);el('mc-status').textContent='Gambar PNG berhasil dibuat.'},' image/png'.trim());});
       el('mc-reset').addEventListener('click',()=>{el('mc-cover').value='';ids.forEach(id=>{const e=el(id);if(id==='mc-title')e.value='Merry Christmas, i miss you';if(id==='mc-artist')e.value='Alex Crichton';if(id==='mc-toplabel')e.value='Merry Christmas, I wish you';if(id==='mc-side')e.value='Alex Crichton';if(id==='mc-current')e.value='3:16';if(id==='mc-duration')e.value='4:07';if(id==='mc-device')e.value='AirPods';if(id==='mc-bg')e.value='#77727a';});cover=null;if(coverUrl)URL.revokeObjectURL(coverUrl);coverUrl=null;draw();el('mc-status').textContent='Form direset.';});draw();
     })();
-
-
-    // Meme sticker editor: image rendering and PNG export stay on-device.
-    (() => {
-      const canvas=document.getElementById('sticker-canvas'); if(!canvas)return;
-      const ctx=canvas.getContext('2d'), file=document.getElementById('sticker-image');
-      const top=document.getElementById('sticker-top'), bottom=document.getElementById('sticker-bottom');
-      const size=document.getElementById('sticker-size'), color=document.getElementById('sticker-color');
-      const status=document.getElementById('sticker-status'); let photo=null, objectUrl=null;
-      function draw(){
-        const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);
-        if(photo){const scale=Math.max(w/photo.width,h/photo.height),sw=w/scale,sh=h/scale,sx=(photo.width-sw)/2,sy=(photo.height-sh)/2;ctx.drawImage(photo,sx,sy,sw,sh,0,0,w,h)}
-        else {ctx.fillStyle='#27364a';ctx.fillRect(0,0,w,h);ctx.fillStyle='#a9c8e8';ctx.textAlign='center';ctx.font='bold 28px Arial';ctx.fillText('UPLOAD GAMBAR UNTUK MEMULAI',w/2,h/2)}
-        const font=Math.max(20,Number(size.value)||42);ctx.font=`900 ${font}px Impact, Arial Black, sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.miterLimit=2;
-        const lines=[{t:top.value,y:font*.85},{t:bottom.value,y:h-font*.85}];
-        lines.forEach(({t,y})=>{if(!t.trim())return;let text=t.toLocaleUpperCase();while(ctx.measureText(text).width>w-38&&ctx.font.match(/\d+/)){const f=Math.max(16,parseInt(ctx.font.match(/\d+/)[0])-2);ctx.font=`900 ${f}px Impact, Arial Black, sans-serif`;if(f===16)break;}ctx.lineWidth=Math.max(4,font*.13);ctx.strokeStyle=color.value==='#000000'?'#fff':'#111';ctx.fillStyle=color.value;ctx.strokeText(text,w/2,y,w-30);ctx.fillText(text,w/2,y,w-30);ctx.font=`900 ${font}px Impact, Arial Black, sans-serif`;});
-      }
-      file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(!f.type.startsWith('image/')){status.textContent='File harus berupa gambar.';return;}if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(f);const img=new Image();img.onload=()=>{photo=img;draw();status.textContent='Gambar siap. Atur teks lalu download PNG.'};img.onerror=()=>status.textContent='Gambar tidak dapat dibuka.';img.src=objectUrl;});
-      [top,bottom,size,color].forEach(el=>el.addEventListener('input',draw));
-      document.getElementById('sticker-download').addEventListener('click',()=>{if(!photo){status.textContent='Pilih gambar terlebih dahulu.';return;}draw();canvas.toBlob(blob=>{if(!blob){status.textContent='Gagal membuat PNG.';return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='slavvtech-meme-sticker.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Stiker PNG berhasil disiapkan.'},' image/png'.trim());});
-      document.getElementById('sticker-reset').addEventListener('click',()=>{file.value='';top.value='';bottom.value='';size.value=42;color.value='#ffffff';photo=null;draw();status.textContent='Pilih gambar untuk mulai membuat stiker.'});draw();
-    })();
-  </script>
+</script>
 
 
 
